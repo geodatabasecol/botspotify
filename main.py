@@ -3,6 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from threading import Thread, Barrier
 from selenium.webdriver.chrome.options import Options
+#asdsadsadsadas
 
 def func (threads,emails, passwod,listaartista,itemsagregar):
   
