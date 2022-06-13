@@ -13,7 +13,7 @@ def func(threads):
   #options.add_argument('--start-fullscreen')
   options.add_argument('--single-process')
   options.add_argument('--disable-dev-shm-usage')
-  options.add_argument("--incognito")
+  #options.add_argument("--incognito")
   options.add_argument('--disable-blink-features=AutomationControlled')
   options.add_argument('--disable-blink-features=AutomationControlled')
   options.add_experimental_option('useAutomationExtension', False)
@@ -21,15 +21,15 @@ def func(threads):
   options.add_argument("disable-infobars")
   driver = webdriver.Chrome(options=options)
   driver.get(url)
-  time.sleep(20)
-  #driver.close()
+  time.sleep(180)
+  
 
   threads.wait()
 
 
-url='https://nordvpn.com/es/what-is-my-ip/'
+url='https://www.spotify.com/us/signup'
 
-numero_multitareas = 20
+numero_multitareas = 2
 
 barrier = Barrier(numero_multitareas)
 

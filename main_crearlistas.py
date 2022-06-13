@@ -3,14 +3,27 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from threading import Thread, Barrier
 from selenium.webdriver.chrome.options import Options
-#asdsadsadsadas
+
 
 def func (threads,emails, passwod,listaartista,itemsagregar):
   
   options = Options()
   options.page_load_strategy = 'normal'
   driver = webdriver.Chrome(options=options)
-  driver.implicitly_wait(0.5)
+  options.page_load_strategy = 'normal'
+  options.add_argument('--no-sandbox')
+  options.add_argument('--start-maximized')
+  #options.add_argument('--start-fullscreen')
+  options.add_argument('--single-process')
+  options.add_argument('--disable-dev-shm-usage')
+  #options.add_argument("--incognito")
+  options.add_argument('--disable-blink-features=AutomationControlled')
+  options.add_argument('--disable-blink-features=AutomationControlled')
+  options.add_experimental_option('useAutomationExtension', False)
+  options.add_experimental_option("excludeSwitches", ["enable-automation"])
+  options.add_argument("disable-infobars")
+  driver = webdriver.Chrome(options=options)
+  driver.implicitly_wait(1.5)
   driver.get(login_spotify)
   time.sleep(2)
   print (driver.current_url)
@@ -53,8 +66,8 @@ login_spotify = "https://accounts.spotify.com/en/login/?continue=https%3A//open.
 numero_multitareas = 1
 
 barrier = Barrier(numero_multitareas)
-emails=["casadedosportres@gmail.com"]
-passwod=['!asdf123456']
+emails=["casadedosportres@gmail.com","sinlerest12@gmail.com", "fredysiyle33@gmail.com"]
+passwod=['!asdf123456', '!asdf123456','!asdf123456']
 threads = []
 listartistas=['michael jackson','eminen']
 
