@@ -50,7 +50,7 @@ estadocreacionacc - int
 user - string,
 email -string,
 pass - string
-
+estadoejecucion - int
 estadocreacionlistareprod - int
 cantidaddereproducciones - int
 reportedeerror - string

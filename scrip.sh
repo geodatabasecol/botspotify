@@ -8,9 +8,10 @@ unzip chromedriver_linux64
 
 sudo mv chromedriver /usr/local/share/chromedriver
 sudo ln -s /usr/local/share/chromedriver /usr/bin/chromedriver
-sudo pip3 install selenium
 
+sudo pip3 install selenium
 sudo pip3 install webdriver-manager
+sudo pip3 install pymongo
 
 pip3 freeze
 whereis chromedriver
