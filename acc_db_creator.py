@@ -30,16 +30,18 @@ lista=[post1, post2,post3, post4, post5]
 #acc_datacollection.drop()
 #acc_user_singupcollection.drop()
 
+mesesingles=["January","February","March","April","May","June","July","August","September","October","November","December"]
+
+mesesespanol=["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]
+
+genderid=["gender_option_male","gender_option_female", "gender_option_nonbinary"]
 
 
 result=acc_datacollection.find( { "acc_estado": 0 } )
 for elem in result: 
-  acc_datacollection.update_one({ "_id": elem["_id"] }, {"$set": { "pass":"!asdf2021"}})
+  acc_datacollection.update_one({ "_id": elem["_id"] }, {"$set": { "acc_estado":0}})
 
-  #acc_user_singupcollection.insert_one({"_id":elem["_id"],"day":random.sample(range(1,28), 1)[0], "month":random.sample(range(1,12), 1)[0],"year":random.sample(range(1990,2004), 1)[0], "genero":random.sample(range(1,3), 1)[0]})
+  #acc_user_singupcollection.insert_one({"_id":elem["_id"],"day":random.sample(range(1,28), 1)[0],"month": random.choice(mesesingles),"year":random.sample(range(1990,2004),1)[0],"year":random.choice(genderid)})
   
-#for elem in result:  print (elem)
-
-
 
 client.close()

@@ -32,13 +32,17 @@ def func(threads,emails, passwod,username,dia,mes,year,genero):
   driver.find_element(By.ID,"confirm").send_keys(emails)
   driver.find_element(By.ID,"password").send_keys(passwod)
   driver.find_element(By.ID,"displayname").send_keys(username)
-  driver.find_element(By.ID,"month").send_keys("Marzo")
+  driver.find_element(By.ID,"month").send_keys(mes)
+  driver.find_element(By.ID,"day").send_keys(dia)
+  driver.find_element(By.ID,"year").send_keys(year)
+  driver.find_element(By.ID,genero).click()
+
   
 
   #ingresar = driver.find_element(By.ID,"login-button")
   #ingresar.click()
   print("ok loging  ", emails)
-  time.sleep(30)
+  time.sleep(50)
   threads.wait()
 
 
@@ -76,6 +80,7 @@ year=[]
 genero=[]
 
 acc_user_singupdata1=acc_datacollection.find( { "acc_estado": 0 } )
+
 for elem in acc_user_singupdata1[0:numero_multitareas]:
   itir=0
   acc_user_singupdata2=acc_user_singupcollection.find_one( { "_id": elem["_id"]} )
