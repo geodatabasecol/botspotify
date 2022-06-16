@@ -16,9 +16,9 @@ acc_datacollection = db["accountmanager"]
 acc_user_singupcollection = db["acc_user_info_singup"]
 
 post1={ "acc_estado":1,"email": "emailadd@gmail.com", "pass":"!asdf2021","username":"emailadd" }
-post2={ "acc_estado":0,"email": "regvcdnd@gmail.com", "pass":"!asdf2021","username":"regvcdnd" }
-post3={ "acc_estado":0,"email": "5rteyfy4@gmail.com", "pass":"!asdf2021","username":"5rteyfy4" }
-post4={ "acc_estado":0,"email": "dhtrghfd@gmail.com", "pass":"!asdf2021","username":"dhtrghfd" }
+post2={ "acc_estado":1,"email": "regvcdnd@gmail.com", "pass":"!asdf2021","username":"regvcdnd" }
+post3={ "acc_estado":1,"email": "5rteyfy4@gmail.com", "pass":"!asdf2021","username":"5rteyfy4" }
+post4={ "acc_estado":1,"email": "dhtrghfd@gmail.com", "pass":"!asdf2021","username":"dhtrghfd" }
 post5={ "acc_estado":0,"email": "vbxcvbvc@gmail.com", "pass":"!asdf2021","username":"vbxcvbvc" }
 
 
@@ -34,14 +34,21 @@ mesesingles=["January","February","March","April","May","June","July","August","
 
 mesesespanol=["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]
 
-genderid=["gender_option_male","gender_option_female", "gender_option_nonbinary"]
+genderid=['//*[@id="gender_option_male"]','//*[@id="gender_option_female"]', '//*[@id="gender_option_nonbinary"]']
 
 
-result=acc_datacollection.find( { "acc_estado": 0 } )
+result=acc_datacollection.find( { "acc_estado": 1 } )
 for elem in result: 
   acc_datacollection.update_one({ "_id": elem["_id"] }, {"$set": { "acc_estado":0}})
 
-  #acc_user_singupcollection.insert_one({"_id":elem["_id"],"day":random.sample(range(1,28), 1)[0],"month": random.choice(mesesingles),"year":random.sample(range(1990,2004),1)[0],"year":random.choice(genderid)})
+
+for elem in result: 
+  acc_user_singupcollection.update_one({ "_id": elem["_id"] }, 
+  {"$set": { 
+  "month": random.choice(mesesespanol), 
+  "genero":random.choice(genderid)}})
   
+  #acc_user_singupcollection.insert_one({"_id":elem["_id"],"day":random.sample(range(1,28), 1)[0],"month": random.choice(mesesingles),"year":random.sample(range(1990,2004),1)[0],"year":random.choice(genderid)})
+
 
 client.close()

@@ -22,7 +22,7 @@ def func(threads):
   driver = webdriver.Chrome(options=options)
   driver.get(url)
   time.sleep(20)
-  #driver.close()
+  
 
   threads.wait()
 

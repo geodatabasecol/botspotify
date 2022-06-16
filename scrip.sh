@@ -12,6 +12,7 @@ sudo ln -s /usr/local/share/chromedriver /usr/bin/chromedriver
 sudo pip3 install selenium
 sudo pip3 install webdriver-manager
 sudo pip3 install pymongo
+sudo pip3 install "pymongo[srv]"
 
 pip3 freeze
 whereis chromedriver
