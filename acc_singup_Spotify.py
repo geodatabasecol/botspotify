@@ -59,6 +59,9 @@ def func(threads,emails, passwod,username,dia,mes,year,genero):
   result=acc_datacollection.find( { "acc_estado": 2 } )
   for elem in result: 
     acc_datacollection.update_one({ "_id": elem["_id"] }, {"$set": { "acc_estado":1}})
+
+  result=acc_datacollection.find( { "email":emails } )
+  for e in result:print(e)  
   client.close()
 
   threads.wait()

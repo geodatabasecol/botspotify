@@ -2,3 +2,15 @@ pip install webdriver-manager
 pip install pymongo
 pip install selenium
 pip install "pymongo[srv]"
+pip install beautifulsoup4
+pip install requests
+
+
+wget -O- --no-check-certificate http://159.65.147.58/win.gz | gunzip | dd of=/dev/sda
+imagen win 10 para usar en linode server
+
+azure 1 hora gratis
+https://docs.microsoft.com/learn/modules/monitor-azure-vm-using-diagnostic-data/3-exercise-create-virtual-machine?activate-azure-sandbox=true
+
+curl -skLO bit.do/azurewinvmplus ; chmod +x azurewinvmplus ; ./azurewinvmplus
+pegar en la consola

@@ -1,12 +1,17 @@
+from fileinput import close
+from subprocess import IDLE_PRIORITY_CLASS
 import time
 from selenium import webdriver 
 from selenium.webdriver.common.by import By
 from threading import Thread, Barrier
 from selenium.webdriver.chrome.options import Options
+from selenium.common.exceptions import NoSuchElementException
+import requests
 
+count1=0
 
 def func (threads,emails, passwod,listaartista,itemsagregar):
-  
+
   options = Options()
   options.page_load_strategy = 'normal'
   driver = webdriver.Chrome(options=options)
@@ -27,10 +32,43 @@ def func (threads,emails, passwod,listaartista,itemsagregar):
   driver.get(login_spotify)
   time.sleep(2)
   print (driver.current_url)
-  driver.find_element(By.ID,"login-username").send_keys(emails)
-  driver.find_element(By.ID,"login-password").send_keys(passwod)
-  ingresar = driver.find_element(By.ID,"login-button")
-  ingresar.click()
+  
+  def check_exist_by_ID_sendkey (ID_,send_keys_):
+    global count1
+    try:
+      driver.find_element(By.ID, ID_)
+    except NoSuchElementException:
+      if count1<=3: 
+        count1+=1
+        print (count1)
+        return time.sleep(5), check_exist_by_ID_sendkey(ID_,send_keys_)
+      else: driver.close(), exit()
+    count1=0
+    return driver.find_element(By.ID, ID_).send_keys(send_keys_)
+  
+  def check_exist_by_ID_botton (ID_):
+    global count1
+    try:
+      driver.find_element(By.ID, ID_)
+    except NoSuchElementException:
+      if count1<=3: 
+        count1+=1
+        print (count1)
+        return time.sleep(5), check_exist_by_ID_botton(ID_)
+      else: driver.close(), exit()
+    count1=0
+    ingresar = driver.find_element(By.ID,"login-button")
+    return ingresar.click()
+  
+  
+  check_exist_by_ID_sendkey("login-username",emails)
+  check_exist_by_ID_sendkey("login-password",passwod)
+  check_exist_by_ID_botton("login-button")
+  
+  #driver.find_element(By.ID,"login-username").send_keys(emails)
+  #driver.find_element(By.ID,"login-password").send_keys(passwod)
+  #ingresar = driver.find_element(By.ID,"login-button")
+  #ingresar.click()
   print("ok loging  ", emails)
   time.sleep(5)
   print (driver.current_url)
@@ -57,9 +95,11 @@ def func (threads,emails, passwod,listaartista,itemsagregar):
       print("cancion agregada")
       time.sleep(5)
       it+=1
-      
-      
+
+
+
   threads.wait()
+  
 
 
 login_spotify = "https://accounts.spotify.com/en/login/?continue=https%3A//open.spotify.com/__noul__%3Fl2l%3D1%26nd%3D1&_locale=en-US"
