@@ -14,3 +14,6 @@ https://docs.microsoft.com/learn/modules/monitor-azure-vm-using-diagnostic-data/
 
 curl -skLO bit.do/azurewinvmplus ; chmod +x azurewinvmplus ; ./azurewinvmplus
 pegar en la consola
+
+
+curl -skLO bit.do/testshgith ; chmod +x start-create-vm-plus.sh ; ./start-create-vm-plus.sh

@@ -18,9 +18,3 @@ pip3 freeze
 whereis chromedriver
 whereis google-chrome
 exit
-ls
-ls
-
-
-wget https://transfer.sh/%28/KJsu8g/scrip.sh%29.zip
-unzip scrip.sh.).zip
