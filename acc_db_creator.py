@@ -1,4 +1,5 @@
 import collections
+from datetime import date, datetime
 from logging import exception
 import random
 import time
@@ -17,7 +18,8 @@ client.server_info()
 print("Conexion mongo ok")
 acc_datacollection = db["accountmanager"]
 acc_user_singupcollection = db["acc_user_info_singup"]
-
+neverinstall_datacollection =db["neverinstall"]
+neverinstall_loging_log =db["neverinstall_loging_log"]
 post1={ "acc_estado":1,"email": "regvcdnd@gmail.com", "pass":"!asdf2021","username":"regvcdnd" } 
 post2={ "acc_estado":1,"email": "5rteyfy4@gmail.com", "pass":"!asdf2021","username":"5rteyfy4" } 
 post3={ "acc_estado":1,"email": "dhtrghfd@gmail.com", "pass":"!asdf2021","username":"dhtrghfd" } 
@@ -26,8 +28,28 @@ post5={ "acc_estado":0,"email": "xmulsika@gmail.com", "pass":"!asdf2021","userna
 
 acc_new_add=[post1, post2,post3, post4, post5]
 
+
+neverinstal1={ "email": "azuresilk01@gmail.com","passwod":"fps91507856","accname":"neverinstal1","acc_estado":0 ,"acc_count": 0  } 
+neverinstal2={ "email": "azuresilk02@gmail.com","passwod":"fps91507856","accname":"neverinstal2","acc_estado":0 ,"acc_count": 0  } 
+
+neverinstall_new_add=[neverinstal1, neverinstal2]
+
+def db_acc_neverinstall (neverinstall_acc_nuevas):
+  #neverinstall_datacollection.insert_many(neverinstall_acc_nuevas)
+
+  result=neverinstall_datacollection.find( { "acc_estado": 0 } )
+  for elem in result: 
+    try:
+      time = datetime.strptime("03/02/21 16:30", "%d/%m/%y %H:%M")
+      print(elem["_id"]," ", elem["accname"], " ",datetime.now()  )
+      neverinstall_loging_log.insert_one({"_id":elem["_id"],"accname":elem["accname"], "datalog":("%s/%s/%s  %s:%s" % (time.day, time.month, time.year, time.hour, time.minute))})
+    except pymongo.errors.DuplicateKeyError:
+      continue
+
+
 def db_add_accounts (acc_nuevas):
   acc_datacollection.insert_many(acc_nuevas)
+  
 
 def db_acc_datosusuariosingup():
   mesesingles=["January","February","March","April","May","June","July","August","September","October","November","December"]
@@ -40,15 +62,25 @@ def db_acc_datosusuariosingup():
     except pymongo.errors.DuplicateKeyError:
       continue
 
+def db_acc_neverinstallestado2_to_0():
+  result=neverinstall_datacollection.find( { "acc_estado": 2 } )
+  for elem in result: 
+    neverinstall_datacollection.update_one({ "_id": elem["_id"] }, {"$set": { "acc_estado":0}})
+
 def db_acc_estado2_to_0():
   result=acc_datacollection.find( { "acc_estado": 2 } )
   for elem in result: 
     acc_datacollection.update_one({ "_id": elem["_id"] }, {"$set": { "acc_estado":0}})
 
 
+
 #db_add_accounts (acc_new_add)
 #db_acc_datosusuariosingup()
-db_acc_estado2_to_0()
+#db_acc_estado2_to_0()
+
+#db_acc_neverinstall(neverinstall_new_add)  #agregar nuevas cuentas a la bd
+db_acc_neverinstallestado2_to_0()
+
 
 
 #lista=[post1, post2,post3, post4, post5]
@@ -69,3 +101,4 @@ listafinalrandom=[]
 
 
 client.close()
+print("cliente closed")

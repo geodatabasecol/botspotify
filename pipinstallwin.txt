@@ -15,5 +15,15 @@ https://docs.microsoft.com/learn/modules/monitor-azure-vm-using-diagnostic-data/
 curl -skLO bit.do/azurewinvmplus ; chmod +x azurewinvmplus ; ./azurewinvmplus
 pegar en la consola
 
+wget -O myfile.txt 
+https://raw.githubusercontent.com/geodatabasecol/botspotify/main/scrip.sh?token=GHSAT0AAAAAABVYJGWI45LKH4HGRYKFLFA6YVOUEXQ
 
-curl -skLO bit.do/testshgith ; chmod +x start-create-vm-plus.sh ; ./start-create-vm-plus.sh
+curl -skLO https://raw.githubusercontent.com/geodatabasecol/Python-Dashboard-Panel/main/scrip.sh ; chmod +x scrip.sh ; ./scrip.sh
+
+
+curl -skLO https://raw.githubusercontent.com/geodatabasecol/Python-Dashboard-Panel/main/scriptest.sh ; chmod +x scriptest.sh ; sed -i 's/\r$//' scriptest.sh; ./scriptest.sh
+
+https://raw.githubusercontent.com/geodatabasecol/Python-Dashboard-Panel/main/scriptest.sh
+
+
+sed -i 's/\r$//' path/to/file
