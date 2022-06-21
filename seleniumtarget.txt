@@ -1,0 +1,108 @@
+
+#BOTON CREATE AN APP CUANDO SE INICIA NEVER INSTAL
+<a aria-label="buttonLink" href="/spaces" class="sc-4fa61142-1 gkswXJ" style="color: var(--pure-white); padding: 8px 14px; width: fit-content; margin-top: 28px;">Create an app</a>
+
+//*[@id="__next"]/div/main/div[2]/div/div/div/div/div/div[2]/a
+
+
+#barra de progreso
+<div role="progressbar" class="progress-bar" aria-valuenow="97" aria-valuemin="0" aria-valuemax="100" style="width: 97%;"></div>
+
+//*[@id="__next"]/div/main/div[2]/div/div/div/div/div/div[2]/div/div/div[6]/div[1]/div/div/div/div[1]/div/div
+
+
+#resume app
+<span class="sc-dcfcb38c-3 fBCagd">Resume app</span>
+//*[@id="__next"]/div/main/div[2]/div/div/div/div/div/div[2]/div/div/div[6]/div[1]/div/div/button/div/span
+
+
+#OPEN APP
+
+<span class="sc-dcfcb38c-2 dKFIhM">Open in browser</span>
+//*[@id="__next"]/div/main/div[2]/div/div/div/div/div/div[2]/div/div/div[6]/div[1]/div/button/div/span
+
+
+<path fill-rule="evenodd" d="M0 2.5a1.5 1.5 0 1 0 3 0 1.5 1.5 0 0 0-3 0zm0 5a1.5 1.5 0 1 0 3 0 1.5 1.5 0 0 0-3 0zM1.5 14a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"></path>
+
+//*[@id="__next"]/div/main/div[2]/div/div/div/div/div/div[2]/div/div/div[6]/div[2]/div/div/button/svg/path
+
+
+BOTON 3 PUNTOS CUANDO ESTA EN  RESUMEN APP
+<button aria-label="button" class="sc-3b1c0908-0 crZys"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 3 16" height="20" width="20" xmlns="http://www.w3.org/2000/svg" style="color: var(--secondary-cta-new);"><path fill-rule="evenodd" d="M0 2.5a1.5 1.5 0 1 0 3 0 1.5 1.5 0 0 0-3 0zm0 5a1.5 1.5 0 1 0 3 0 1.5 1.5 0 0 0-3 0zM1.5 14a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"></path></svg></button>
+
+//*[@id="__next"]/div/main/div[2]/div/div/div/div/div/div[2]/div/div/div[6]/div[2]/div/div/button/svg/path
+
+
+BOTON DELET CUANDO ESTA EN RESUMEN APP DESPUEES DE LOS 3 PUNTOS DE ARRIBA
+//*[@id="delete"]/div
+
+
+BOTON BORRAN CUANDO ESTA EN 99% DE CARGA
+<img aria-label="deleteIcon" src="https://ni-assets.azureedge.net/neverinstall-assets/homepage/delete.svg" class="icon">
+//*[@id="__next"]/div/main/div[2]/div/div/div/div/div/div[2]/div/div/div[6]/div[2]/a/img
+
+
+
+## BOTON 3 PUNTOS CUANDO ESTA EN OPEN IN BROWZER
+<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 3 16" height="20" width="20" xmlns="http://www.w3.org/2000/svg" style="color: var(--secondary-cta-new);"><path fill-rule="evenodd" d="M0 2.5a1.5 1.5 0 1 0 3 0 1.5 1.5 0 0 0-3 0zm0 5a1.5 1.5 0 1 0 3 0 1.5 1.5 0 0 0-3 0zM1.5 14a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"></path></svg>
+
+//*[@id="__next"]/div/main/div[2]/div/div/div/div/div/div[2]/div/div/div[6]/div[2]/div/div/button/svg
+
+
+#BOTON DELET SALE DE 3 PUNTOS CUANDO ESTA "OPEN BROWSER"
+<div class="sc-f4c3d624-3 gCtvxY">Delete</div>
+
+//*[@id="delete"]/div
+
+
+
+<span class="sc-d17e366e-2 ccnidS">99%</span>
+
+//*[@id="__next"]/div/main/div[2]/div/div/div/div/div/div[2]/div/div/div[6]/div[1]/div/div/div/div[1]/span
+
+
+<span>Delete</span>
+
+BOTON DESPUES DE DAR CLICK EN BORRAR EL MENU QUE SALE 
+
+<button aria-label="button" class="sc-3dd55e7f-0 icxMxb" style="width: clamp(120px, 10.4167vw, 200px);"><span>Delete</span></button>
+
+//*[@id="__next"]/div/main/div[2]/div/div/div/div/div/div[2]/div/div/div[6]/div[2]/div/div/div/div/div[2]/button[1]
+
+
+
+
+
+<button aria-label="button" class="sc-3dd55e7f-0 icxMxb" style="width: clamp(120px, 10.4167vw, 200px);"><span>Delete</span></button>
+
+
+
+
+<div class="sc-a278f39d-2 kIGMrr">Not used yet</div>
+
+
+//*[@id="__next"]/div/main/div[2]/div/div/div/div/div/div[2]/div/div/div[4]/div[2]/div[2]
+
+<div class="sc-a278f39d-2 kIGMrr">3 minutes ago</div>
+
+
+#abrir lugar del servidor
+//*[@id="__next"]/div/main/div[2]/div/div/div/div/div[2]/div[1]/div[2]/div[1]/div[3]/div/div/div/button/div/div/div[2]/svg
+
+
+//*[@id="__next"]/div/main/div[2]/div/div/div/div/div[2]/div[1]/div[2]/div[1]/div[3]/div/div/div/button/div
+//*[@id="__next"]/div/main/div[2]/div/div/div/div/div[2]/div[1]/div[2]/div[1]/div[3]/div
+
+//*[@id="__next"]/div/main/div[2]/div/div/div/div/div[2]/div[1]/div[2]/div[1]/div[3]/div/div/div/button
+
+
+//*[@id="Europe"]
+//*[@id="India"]
+//*[@id="North America"]
+//*[@id="Singapore"]
+
+/html/body/div/div/main/div[2]/div/div/div/div/div[2]/div[1]/div[2]/div[1]/div[3]/div/div/div/div/div[1]
+/html/body/div/div/main/div[2]/div/div/div/div/div[2]/div[1]/div[2]/div[1]/div[3]/div/div/div/div/div[2]
+/html/body/div/div/main/div[2]/div/div/div/div/div[2]/div[1]/div[2]/div[1]/div[3]/div/div/div/div/div[3]
+/html/body/div/div/main/div[2]/div/div/div/div/div[2]/div[1]/div[2]/div[1]/div[3]/div/div/div/div/div[4]
+

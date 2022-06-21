@@ -31,11 +31,15 @@ acc_new_add=[post1, post2,post3, post4, post5]
 
 neverinstal1={ "email": "azuresilk01@gmail.com","passwod":"fps91507856","accname":"neverinstal1","acc_estado":0 ,"acc_count": 0  } 
 neverinstal2={ "email": "azuresilk02@gmail.com","passwod":"fps91507856","accname":"neverinstal2","acc_estado":0 ,"acc_count": 0  } 
+neverinstal3={ "email": "azuresilk03@gmail.com","passwod":"fps91507856","accname":"neverinstal3","acc_estado":0 ,"acc_count": 0  } 
+neverinstal4={ "email": "azuresilk04@gmail.com","passwod":"fps91507856","accname":"neverinstal4","acc_estado":0 ,"acc_count": 0  } 
+neverinstal5={ "email": "azuresilk05@gmail.com","passwod":"fps91507856","accname":"neverinstal5","acc_estado":0 ,"acc_count": 0  } 
+neverinstal6={ "email": "azuresilk06@gmail.com","passwod":"fps91507856","accname":"neverinstal6","acc_estado":0 ,"acc_count": 0  } 
 
-neverinstall_new_add=[neverinstal1, neverinstal2]
+neverinstall_new_add=[neverinstal3, neverinstal4,neverinstal5,neverinstal6]
 
 def db_acc_neverinstall (neverinstall_acc_nuevas):
-  #neverinstall_datacollection.insert_many(neverinstall_acc_nuevas)
+  neverinstall_datacollection.insert_many(neverinstall_acc_nuevas)
 
   result=neverinstall_datacollection.find( { "acc_estado": 0 } )
   for elem in result: 
