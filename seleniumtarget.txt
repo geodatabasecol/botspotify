@@ -105,4 +105,3 @@ BOTON DESPUES DE DAR CLICK EN BORRAR EL MENU QUE SALE
 /html/body/div/div/main/div[2]/div/div/div/div/div[2]/div[1]/div[2]/div[1]/div[3]/div/div/div/div/div[2]
 /html/body/div/div/main/div[2]/div/div/div/div/div[2]/div[1]/div[2]/div[1]/div[3]/div/div/div/div/div[3]
 /html/body/div/div/main/div[2]/div/div/div/div/div[2]/div[1]/div[2]/div[1]/div[3]/div/div/div/div/div[4]
-

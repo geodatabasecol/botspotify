@@ -6,6 +6,7 @@
 #pip install "pymongo[srv]"
 
 import collections
+from itertools import starmap
 import os
 import random
 import time
@@ -24,7 +25,9 @@ from selenium.webdriver.support.select import Select
 
 #funcion que lanza los multihilos y actualiza el estado de la acc a 1 si finaliza todo ok.
 def func(threads,emails, passwod,accname,acc_estado,timesleep):
-
+  global start
+  start = time.time()
+  
   options = Options()
   options.page_load_strategy = 'normal'
   driver = webdriver.Chrome(options=options)
@@ -35,7 +38,7 @@ def func(threads,emails, passwod,accname,acc_estado,timesleep):
   options.add_argument('--single-process')
   options.add_argument('--disable-dev-shm-usage')
   #options.add_argument("--incognito")
-  options.add_argument('--disable-gpu')
+  options.add_argument('--enable-gpu')
   options.add_argument('--disable-blink-features=AutomationControlled')
   options.add_experimental_option('useAutomationExtension', False)
   options.add_experimental_option("excludeSwitches", ["disable-automation"])
@@ -198,18 +201,18 @@ def func(threads,emails, passwod,accname,acc_estado,timesleep):
 
 
         return print("terminando crear app")
-
+    
 
   def iniciarbotonresume():
+
+        
         try:
             (WebDriverWait(driver, 3)
             .until(expected_conditions.element_to_be_clickable((By.XPATH, '//*[@id="__next"]/div/main/div[2]/div/div/div/div/div/div[2]/div/div/div[6]/div[1]/div/div/button')))
             .click()
             )
-            print("click botonresume")    
         except TimeoutException:
-            print("No encontro en 3 seg boton resumen, retorna a iniciarbotonresumen funcion ok")
-            print ("Pasa a buscar boton openAPP")
+            pass
 
         try:
             (WebDriverWait(driver, 20)
@@ -217,44 +220,96 @@ def func(threads,emails, passwod,accname,acc_estado,timesleep):
             .click()
             )
             print("click boton_openAPP")    
+            print("start time") 
         except TimeoutException:
-            print("No encontro boton openAPP, retorna a iniciarbotonresumen funcion ok")
             iniciarbotonresume() 
         #CONTINUA AQUI REGISTRAR EN LA BD NEVERINSTAL EL ESTADO 1 PARA EL TYNKTASK ACTIVO
         # SOLO EJECUTA TYNKTASK SI ESTA EN ESTADO 0 (DISPONIBLE)    
         return True
 
+  def iniciarboton_openAPP():
+
+        try:
+            (WebDriverWait(driver, 20)
+            .until(expected_conditions.element_to_be_clickable((By.XPATH, '/html/body/div/div/main/div[2]/div/div/div/div/div/div[2]/div/div/div[6]/div[1]/div/button')))
+            .click()
+            )
+            print("click boton_openAPP")
+            
+           
+        except TimeoutException:
+            iniciarbotonresume() 
+        #CONTINUA AQUI REGISTRAR EN LA BD NEVERINSTAL EL ESTADO 1 PARA EL TYNKTASK ACTIVO
+        # SOLO EJECUTA TYNKTASK SI ESTA EN ESTADO 0 (DISPONIBLE)    
+        return True
+
+
   def countTabs():
     mainTab=  driver.window_handles
     return len(mainTab)
 
-  def evaluar(evaluarestado,Tabs) :
-    countminitos=0
-    print ("Entrando a evaluar")  
-    contador=0
-    if evaluarestado ==  "boton_createAPP" and Tabs==0:
-        print("---> Entrando a funcion crearapp()")
+  def evaluar(evaluarestado,Tabs, e,s) :
+    global end
+    global start
+    print((e-s),accname)
+    if evaluarestado ==  "boton_createAPP" and Tabs==1:
+        #print("---> evaluarestado ==  'boton_createAPP'")
         crearapp() # no va ser necesario porque se deja creada la app solo una vez
-    elif evaluarestado ==  "boton_resumen":  
-        print("---> Entrando a funcion iniciarbotonresume()")
-        iniciarbotonresume()
-    elif evaluarestado ==  "boton_createAPP" and Tabs==1 and contador ==0:
-        print("---> Entrando a lanzar  TINYTASK por primera vez falta codear la funcion")
-        contador =1
-        crearapp() # no va ser necesario porque se deja creada la app solo una vez
-    else:
-        print ("entro al Else de evaluar estado .. bye bye")
-    time.sleep(60)
-    print (f"---> Minuto: {countminitos}Finalizo Evaluar reiniciando evaluar", accname)
-    evaluar (evaluarstadoinicial(),countTabs())
     
+    
+    elif evaluarestado ==  "boton_resumen" and Tabs==1:  
+        #print("---> evaluarestado ==  'boton_resumen'")
+        iniciarbotonresume()
 
+    elif evaluarestado ==  "boton_openAPP" and Tabs==1:  
+        #print("---> evaluarestado ==  'boton_openAPP'")
+        #print("lanzar TYNYTASK")
+        iniciarboton_openAPP()
+    
+    elif evaluarestado ==  "boton_resumen" and Tabs==2:  
+        #print("---> evaluarestado ==  'boton_resumen'")
+        #print ("esto pasaria solo si no funciona el codigo para que no se cierre la pagina")
+        iniciarbotonresume()
+
+    elif evaluarestado ==  "boton_openAPP" and Tabs==2:
+        #print("---> evaluarestado ==  'boton_openAPP' and Tabs==2 and contador ==0")
+        #print("aqui manejar el codigo para que no se cierre")
+        while tiempopararefrecarventana(e,s)==True:
+          print ("AQUI VAN 30 SEGUNDOS", accname)
+          start=time.time()
+          break
+          
+        # no va ser necesario porque se deja creada la app solo una vez
+        
+    else:
+        print ("ELSE")
+    end=time.time()
+    evaluar (evaluarstadoinicial(),countTabs(),end, start)
   
+  def tiempopararefrecarventana(e,s):
+      global start
+      global end
+      if e-s >30:
+        estatus= (f"---> Segundos: {e-s} <--- ")
+        f = open(f'{accname}.txt','a')
+        f.write('\n' + estatus)
+        f.close()
+        return True
+
+      if e-s <30:
+        return False
+      
+  end = time.time()
   
+
+    
+  print (tiempopararefrecarventana(end,start))
+    
+    
   #cmd = "test1.exe"
   #os.system(cmd)
 
-  evaluar (evaluarstadoinicial(),countTabs())
+  evaluar (evaluarstadoinicial(),countTabs(),end, start)
 
   print ("Codigo continua... finalizando..... END... bye bye")
 
@@ -350,21 +405,6 @@ barrier = Barrier(numero_multitareas)
 hiloscerrados = 0
 
 
-
-def iniciarmutitarea (numero_multitareas):
-    global threads
-    threads = []
-    for i in range(numero_multitareas):
-	    #i = Thread(target=func, args=(barrier,emails[i],passwod[i],accname[i],acc_estado[i]))
-        i = Thread(target=func, args=(barrier,emails[i],passwod[i],accname[i],acc_estado[i],timesleep[i]))
-    
-        i.start()
-        time.sleep(3)
-        print ("sleep 3 seg en threads ")
-        threads.append(i)
-    for i in threads:
-	    i.join()
-
 def abrirconexionmongodb ():
     global client
     global db 
@@ -387,6 +427,16 @@ def abrirconexionmongodb ():
 
 
 obtenerdatosdemongodbparacrearneverinstall()
-iniciarmutitarea(numero_multitareas)
 
+threads = []
+for i in range(numero_multitareas):
+  #i = Thread(target=func, args=(barrier,emails[i],passwod[i],accname[i],acc_estado[i]))
+  i = Thread(target=func, args=(barrier,emails[i],passwod[i],accname[i],acc_estado[i],timesleep[i]))
+    
+  i.start()
+  time.sleep(3)
+  print ("sleep 3 seg en threads ")
+  threads.append(i)
 
+for i in threads:
+  i.join()
