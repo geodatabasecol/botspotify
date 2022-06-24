@@ -26,6 +26,17 @@ curl -skLO https://raw.githubusercontent.com/geodatabasecol/Python-Dashboard-Pan
 
  function ClickConnect(){
     console.log("Clicked on connect button"); 
-    document.querySelectorAll ("resolutions").click()
+    $('#hideCTA').click()
 }
 setInterval(ClickConnect,10)
+
+
+//*[@id="hideCTA"]
+
+
+If you have ID attribute you can use
+
+$('#hideCTA').click();
+
+
+//*[@id="vappContainer"]/div[2]/a
