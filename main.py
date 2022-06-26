@@ -9,8 +9,8 @@ from itertools import starmap
 import time
 from threading import Thread, Barrier
 from types import NoneType
-from ModuloTinyTask.activar_tinytask import acction_tinytask
-from ModuloTinyTask.focus_google import *
+from ModuloEventosWindows.activar_tinytask import *
+from ModuloEventosWindows.focus_google import *
 from Modulo_neverInstall.SingIn.singingoogle import *
 from Modulo_Selenium.Crear_driver import *
 from Modulo_Selenium.Tabs import *

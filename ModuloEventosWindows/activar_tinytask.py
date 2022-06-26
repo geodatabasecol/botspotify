@@ -1,11 +1,12 @@
 
 import time
-from ModuloTinyTask.focus_google import *
+from ModuloEventosWindows.focus_google import *
+
 from Modulo_DB.Never_install.DB_TinyTask import *
 from Modulo_Selenium.Tabs import countTabs
 from Modulo_Selenium.focus_windows import *
 from Modulo_neverInstall.estados_home import *
-from Modulo_neverInstall.evaluar import estatus_ventana_activa
+from Modulo_neverInstall.evaluar import *
 
 
 
@@ -32,7 +33,7 @@ def acction_tinytask (driver,ventana,accname):
     print ("Iniciando realizar  funciones en la ventana ",accname)
     a= estatus_ventana_activa()
     
-    time.sleep(20)
+    time.sleep(5)
     archivo= open("status_ventana.txt", "w") 
     archivo.write("0")  
     archivo.close()

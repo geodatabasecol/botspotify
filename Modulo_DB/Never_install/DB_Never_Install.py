@@ -17,7 +17,8 @@ def DB_neverinstall_get_acc (numeromultitareas):
     acc_neverinstall_data=neverinstall_datacollection.find( { "acc_estado": 0 } )
     acc_porregistrar=(len(list(acc_neverinstall_data)))
     if (acc_porregistrar==0):
-        print ("Todas las cuentas de Never install se encuentran en estado 1")
+        print ("Todas las cuentas de Never install se encuentran en estado 1.. \nEjecute acc_db_creator.py solo modo de pruebas")
+
         exit()
     if numeromultitareas>=acc_porregistrar:
         numeromultitareas=acc_porregistrar
