@@ -16,7 +16,9 @@ def DB_neverinstall_get_acc (numeromultitareas):
 #timesleep=[20,20,20,10,10,10]
     acc_neverinstall_data=neverinstall_datacollection.find( { "acc_estado": 0 } )
     acc_porregistrar=(len(list(acc_neverinstall_data)))
-
+    if (acc_porregistrar==0):
+        print ("Todas las cuentas de Never install se encuentran en estado 1")
+        exit()
     if numeromultitareas>=acc_porregistrar:
         numeromultitareas=acc_porregistrar
     

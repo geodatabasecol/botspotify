@@ -17,7 +17,6 @@ def acction_tinytask (driver,ventana,accname):
     a= estatus_ventana_activa()
 
     while a==False:
-        print ("Estatus ventana activa false",accname)
         time.sleep(2)
         a= estatus_ventana_activa()
 
@@ -27,23 +26,16 @@ def acction_tinytask (driver,ventana,accname):
     a= estatus_ventana_activa()
     print(a," ",accname)
     print ("Haciendo focus en la ventana",accname)
+    
     main3(ventana)
 
-    print ("Iniciando realizar  funciones en la ventana ")
-    print ("aqui ejecutar las acciones en la ventana ", accname) 
+    print ("Iniciando realizar  funciones en la ventana ",accname)
     a= estatus_ventana_activa()
-    print(a," ",accname)
-    print ("Haciendo focus en la ventana",accname)
     
-    time.sleep(10)
-    print(a," ",accname)
-    print ("Terminando  funciones en la ventana status ventana ",accname) 
+    time.sleep(20)
     archivo= open("status_ventana.txt", "w") 
     archivo.write("0")  
     archivo.close()
-    time.sleep(2)
-    a= estatus_ventana_activa()
-    print(a," ",accname)
     
     print (status,estadosdelosbotones, Tabs )
   

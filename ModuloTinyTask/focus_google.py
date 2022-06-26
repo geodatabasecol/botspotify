@@ -68,7 +68,7 @@ def main2(nombreventana):
         #cW.kill_task_manager()
         cW.find_window_wildcard(wildcard)
         
-        cW.Maximize()
+        #cW.Maximize()
         cW.SetAsForegroundWindow()
         return cW
         
@@ -82,7 +82,8 @@ def main2(nombreventana):
 def main3(cW):
     sleep(5)
     try:
-        cW.Maximize()
+        cW.setActWin()
+        #cW.Maximize()
         cW.SetAsForegroundWindow()
         cW.valor()
         
