@@ -1,37 +1,37 @@
 import pymongo
 from Modulo_DB.DB_conect import *
 
+{"_id":{"$oid":"62b4d557cf90690e947997a9"},"tinytask_status":{"$numberInt":"0"}}
 
-def tinytaskreset(elem):
+
+def tinytaskreset():
   conexion =abrirconexionmongodb ()
   db=conexion[0]
   client=conexion[1]
   tinytask_data_colection =db["tinytask"]
-  for e in elem: 
-    
-    try:
-      tinytask_data_colection.update_one({"_id":e},{"$set": { "tinytask_status":0}})  
-    except pymongo.errors.ConnectionFailure:
-      tinytaskreset(elem)
+  try:
+      tinytask_data_colection.update_one({"_id":"62b4d557cf90690e947997a9"},{"$set": { "tinytask_status":0}})  
+  except pymongo.errors.ConnectionFailure:
+      tinytaskreset()
   client.close()
   return 0
 
-def tinytaskactivo(id):
+def tinytaskactivo():
   conexion =abrirconexionmongodb ()
   db=conexion[0]
   client=conexion[1]
   tinytask_data_colection =db["tinytask"]
   try:
-    tinytask_data_colection.update_one({"_id":id},{"$set": { "tinytask_status":1}})  
+    tinytask_data_colection.update_one({"_id":'62b4d557cf90690e947997a9'},{"$set": { "tinytask_status":1}})  
   except pymongo.errors.ConnectionFailure:
-    tinytaskactivo(id)
+    tinytaskactivo()
   except pymongo.errors.ExecutionTimeout:
-    tinytaskactivo(id)
+    tinytaskactivo()
   client.close()
-  return 1
 
 
-def tinytaskstatus(id):
+
+def tinytaskstatus():
   conexion =abrirconexionmongodb ()
   db=conexion[0]
   client=conexion[1]
@@ -39,11 +39,13 @@ def tinytaskstatus(id):
 
 
   try:
-    tinystatus =tinytask_data_colection.find({ "_id": id })
-    print (tinystatus)
+    tinystatus =tinytask_data_colection.find()
   except pymongo.errors.ConnectionFailure:
-    tinytaskstatus(id)
+    tinytaskstatus()
   except pymongo.errors.ExecutionTimeout:
-    tinytaskstatus(id)
+    tinytaskstatus()
+  for e in tinystatus :
+    return (e['tinytask_status'])
+  
   client.close()
-  return 1
+     

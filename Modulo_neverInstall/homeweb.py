@@ -52,7 +52,7 @@ def click_botonresume(driver):
             print("click click_botonresume")    
 
         except TimeoutException:
-            click_botonresume()
+            click_botonresume(driver)
         #CONTINUA AQUI REGISTRAR EN LA BD NEVERINSTAL EL ESTADO 1 PARA EL TYNKTASK ACTIVO
         # SOLO EJECUTA TYNKTASK SI ESTA EN ESTADO 0 (DISPONIBLE)    
         return True

@@ -1,7 +1,9 @@
 
 import time
-from Modulo_DB.DB_TinyTask import *
-from Modulo_neverInstall.homeweb.homeweb import *
+from Modulo_DB.Never_install.DB_TinyTask import *
+from Modulo_Selenium.Tabs import countTabs
+from Modulo_neverInstall.evaluar import evaluacion1
+from Modulo_neverInstall.homeweb import *
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.support.ui import WebDriverWait
@@ -60,3 +62,15 @@ def estadodebotonenhome(driver):
   #borrarvisualstudiocode('//*[@id="delete"]/div')
 
 
+def estado0 (estadosdelosbotones,Tabs, driver):
+  paso1=evaluacion1(estadosdelosbotones,Tabs, driver) 
+  REturn,starttime1, starttime2=paso1
+    
+  while REturn!=True:
+      
+    Tabs=countTabs(driver)
+    estadosdelosbotones=estadodebotonenhome(driver)
+    paso1=evaluacion1(estadosdelosbotones,Tabs, driver) 
+    REturn,starttime1, starttime2 = paso1
+  return REturn,starttime1, starttime2
+    

