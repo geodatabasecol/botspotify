@@ -46,6 +46,6 @@ def acction_tinytask (driver,ventana,accname):
     print(a," ",accname)
     
     print (status,estadosdelosbotones, Tabs )
-    perro loco
+  
 
 
