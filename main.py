@@ -75,11 +75,15 @@ def func(threads,id,emails, passwod,accname,acc_estado,acc_count,acc_region,slee
   driver.close()
   threads.wait()
 
-numero_multitareas=7
+numero_multitareas=8
 sleep=[1, 1, 1, 1, 1 ,1, 1]
 
 acc_data=DB_neverinstall_get_acc (numero_multitareas)
-
+for e in acc_data:
+  print (e)
+numero_multitareas=acc_data[7]
+print("hilos",numero_multitareas)
+exit()
 tinytaskreset()
 
 

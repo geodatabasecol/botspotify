@@ -18,8 +18,8 @@ def DB_neverinstall_get_acc (numeromultitareas):
     acc_porregistrar=(len(list(acc_neverinstall_data)))
 
     if numeromultitareas>=acc_porregistrar:
-        numeromultitareas=numeromultitareas
-
+        numeromultitareas=acc_porregistrar
+    
     acc_user_singupdata1=neverinstall_datacollection.find( { "acc_estado": 0 } )
 
     for elem in acc_user_singupdata1[:numeromultitareas]:
@@ -34,5 +34,5 @@ def DB_neverinstall_get_acc (numeromultitareas):
 
     client.close()
     print ("Client close")
-    return ids,emails, password, accname, acc_estado,acc_count, acc_region
+    return ids,emails, password, accname, acc_estado,acc_count, acc_region,numeromultitareas
 
