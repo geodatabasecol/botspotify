@@ -76,11 +76,11 @@ def main2(nombreventana):
         f = open("log.txt", "w")
         f.write(traceback.format_exc())
         print(traceback.format_exc())
-        return "texttoo"
+        return "Error"
 
 
 def main3(cW):
-    sleep(5)
+    sleep(1)
     try:
         cW.setActWin()
         #cW.Maximize()

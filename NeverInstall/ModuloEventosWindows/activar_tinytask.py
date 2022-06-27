@@ -21,7 +21,7 @@ def acction_tinytask (driver,ventana,accname):
         time.sleep(2)
         a= estatus_ventana_activa()
 
-    archivo= open("status_ventana.txt", "w") 
+    archivo= open("NeverInstall\status_ventana.txt", "w") 
     archivo.write("1")  
     archivo.close()
     a= estatus_ventana_activa()
@@ -34,7 +34,7 @@ def acction_tinytask (driver,ventana,accname):
     a= estatus_ventana_activa()
     
     time.sleep(5)
-    archivo= open("status_ventana.txt", "w") 
+    archivo= open("NeverInstall\status_ventana.txt", "w") 
     archivo.write("0")  
     archivo.close()
     

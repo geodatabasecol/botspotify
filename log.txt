@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "c:\Users\silklips\Documents\botspotify\NeverInstall\ModuloEventosWindows\focus_google.py", line 72, in main2
+    cW.SetAsForegroundWindow()
+  File "c:\Users\silklips\Documents\botspotify\NeverInstall\ModuloEventosWindows\focus_google.py", line 17, in SetAsForegroundWindow
+    win32gui.SetForegroundWindow(self.hwnd)
+pywintypes.error: (1400, 'SetForegroundWindow', 'Invalid window handle.')

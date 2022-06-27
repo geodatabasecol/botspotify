@@ -7,7 +7,7 @@ from selenium.common.exceptions import NoSuchElementException
 def iniciarcongoogle(driver,emails,passwod):
 
     def check_exist_by_XPATH_botton (XPATH):
-        global count1
+        count1
         try:
             driver.find_element(By.XPATH, XPATH)
         except NoSuchElementException:

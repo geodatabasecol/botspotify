@@ -94,7 +94,7 @@ def evaluacion2(driver) :
 
 
 def estatus_ventana_activa():
-    with open("status_ventana.txt") as archivo:
+    with open("NeverInstall\status_ventana.txt") as archivo:
         resul =archivo.read()
     if resul== "0":
         return True
