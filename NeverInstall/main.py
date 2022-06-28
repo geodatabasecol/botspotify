@@ -41,21 +41,20 @@ def func(threads,id,emails, passwod,accname,acc_estado,acc_count,acc_region,slee
   driver =crear_driver()
   try:
       driver.get(url)
-      time.sleep(2)
+      
   #driver =crear_driver(url_inicial)
   except :
 
       pass
-  
+  time.sleep(3)
 
   nombreventana= (str.lower(accname)+'.com')
     
-  ventana=main2(nombreventana)
+  commandWindows=optenerdatosventana(nombreventana,accname)
+  print(accname ,commandWindows.valorhwnd())
 
-  continuar=todaslasventanascargadasok(numero_multitareas,i)
-
-  while continuar !=True:  
-    continuar=todaslasventanascargadasok(numero_multitareas,i)
+  todaslasventanascargadasok(numero_multitareas,commandWindows)
+  print(accname ,commandWindows.valorhwnd())
 
   print("Todas las ventanas cargadas... \nIniciando Loging NeverInstall...") 
   
@@ -66,9 +65,11 @@ def func(threads,id,emails, passwod,accname,acc_estado,acc_count,acc_region,slee
   except :
 
       pass
-  
-  time.sleep(60)    
+  print("Cargando NeverInstall OK")
 
+  hacerfocusenlaventana(commandWindows,accname)
+  time.sleep(5)    
+  exit()
   
   # INICIO A HACER LOGIN con google
   if iniciarcongoogle(driver,emails,passwod) ==False:
@@ -103,7 +104,7 @@ def func(threads,id,emails, passwod,accname,acc_estado,acc_count,acc_region,slee
   driver.close()
   threads.wait()
 
-numero_multitareas=7
+numero_multitareas=2
 sleep=[1, 3, 5, 7, 9 ,11, 13]
 
 acc_data=DB_neverinstall_get_acc (numero_multitareas)

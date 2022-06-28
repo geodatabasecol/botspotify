@@ -42,7 +42,7 @@ class cWindow:
 def main():
     sleep(1)
     try:
-        wildcard = "windows"
+        wildcard = "File Explorer"
         cW = cWindow()
 
         #cW.kill_task_manager()
@@ -72,3 +72,4 @@ def main2():
         print(traceback.format_exc())
 
 
+main()
