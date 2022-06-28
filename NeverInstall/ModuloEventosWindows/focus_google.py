@@ -6,14 +6,14 @@ import pythoncom
 class cWindow:
     def __init__(self):
         self._hwnd = None
-        self.shell = None
+        self.shell = win32com.client.Dispatch("WScript.Shell",pythoncom.CoInitialize())
         self._numeroventanascargadas=0
 
     def BringToTop(self):
         win32gui.BringWindowToTop(self._hwnd)
 
     def SetAsForegroundWindow(self):
-        self.shell = win32com.client.Dispatch("WScript.Shell")
+        
         self.shell.SendKeys('%')
         win32gui.SetForegroundWindow(self._hwnd)
 
@@ -43,57 +43,25 @@ class cWindow:
         valor= (self._hwnd)
         return valor
 
-    def numeroventanascargadas(self):
+    def ventanacargadaok(self):
         self._numeroventanascargadas+=1
+
+
+    def numeroventanascargadas(self):
         return self._numeroventanascargadas
 
-def optenerdatosventana(ventana,accname):
+
+    def hacerfocusenlaventana(self, accname):
     
-    try:
-        wildcard = ventana
-        commandWindows = cWindow()
-        #cW.kill_task_manager()
-        commandWindows.find_window_wildcard(wildcard)
-        #cW.Maximize()        
-        #cW.BringToTop()
-        #cW.SetAsForegroundWindow()
-        return(commandWindows)
-    except:
-        traceback.format_exc()
-        print(traceback.format_exc(),"/n", accname)
-
-
-def hacerfocusenlaventana(cWindow,commandWindows, accname):
-    
-    try:
-        commandWindows.Maximize()
-        commandWindows.BringToTop()        
-        commandWindows.SetAsForegroundWindow()
-        return True
+        try:
+            self.Maximize()
+            self.BringToTop()        
+            self.SetAsForegroundWindow()
+            return True
         
-    except:
-        traceback.format_exc()
-        print("Error al hacer focus en la ventana :","/n", accname)
-        exit()
+        except:
+            traceback.format_exc()
+            print(traceback.format_exc(),"Error al hacer focus en la ventana :","/n", accname)
+            exit()
 
 
-def main3(cW):
-    sleep(1)
-    try:
-        cW.setActWin()
-        #cW.Maximize()
-        cW.SetAsForegroundWindow()
-        cW.valor()
-        
-        
-    except:
-        f = open("log.txt", "w")
-        f.write(traceback.format_exc())
-        print(traceback.format_exc())
-
-#    a=main2()
-#    print(a.valor())
-#    main3(a)
-#    main3(a)
-#    main3(a)
-#    main3(a)

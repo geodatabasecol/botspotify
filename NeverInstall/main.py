@@ -49,12 +49,13 @@ def func(threads,id,emails, passwod,accname,acc_estado,acc_count,acc_region,slee
   time.sleep(3)
 
   nombreventana= (str.lower(accname)+'.com')
-    
-  commandWindows=optenerdatosventana(nombreventana,accname)
+
+  commandWindows= cWindow()    
+  commandWindows.find_window_wildcard(nombreventana)
+  commandWindows.ventanacargadaok()
   print(accname ,commandWindows.valorhwnd())
 
   todaslasventanascargadasok(numero_multitareas,commandWindows)
-  print(accname ,commandWindows.valorhwnd())
 
   print("Todas las ventanas cargadas... \nIniciando Loging NeverInstall...") 
   
@@ -67,7 +68,7 @@ def func(threads,id,emails, passwod,accname,acc_estado,acc_count,acc_region,slee
       pass
   print("Cargando NeverInstall OK")
 
-  hacerfocusenlaventana(commandWindows,accname)
+  commandWindows.hacerfocusenlaventana(accname)
   time.sleep(5)    
   exit()
   
@@ -126,7 +127,7 @@ for i in range(numero_multitareas):
                    acc_data[5][i] , acc_data[6][i], sleep[i],i  ))
     
   i.start()
-  
+ 
   #time.sleep(sleep[i])
   print ("sleep 0.2 seg en threads ")
   time.sleep(3)

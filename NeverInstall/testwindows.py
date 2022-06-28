@@ -1,3 +1,4 @@
+from platform import python_compiler
 import re, traceback
 import win32gui, win32con, win32com.client
 from time import sleep
@@ -6,7 +7,7 @@ from time import sleep
 class cWindow:
     def __init__(self):
         self._hwnd = None
-        self.shell = win32com.client.Dispatch("WScript.Shell")
+        self.shell = win32com.client.Dispatch("WScript.Shell",python_compiler.CoInitialize())
 
     def BringToTop(self):
         win32gui.BringWindowToTop(self._hwnd)
