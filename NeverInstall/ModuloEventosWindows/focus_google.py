@@ -1,4 +1,5 @@
 import re, traceback
+from unittest import result
 import win32gui, win32con, win32com.client
 from time import sleep
 import pythoncom
@@ -7,8 +8,6 @@ class cWindow:
     def __init__(self):
         self._hwnd = None
         self.shell = win32com.client.Dispatch("WScript.Shell",pythoncom.CoInitialize())
-        self._numeroventanascargadas=0
-
     def BringToTop(self):
         win32gui.BringWindowToTop(self._hwnd)
 
@@ -42,14 +41,6 @@ class cWindow:
     def valorhwnd (self):
         valor= (self._hwnd)
         return valor
-
-    def ventanacargadaok(self):
-        self._numeroventanascargadas+=1
-
-
-    def numeroventanascargadas(self):
-        return self._numeroventanascargadas
-
 
     def hacerfocusenlaventana(self, accname):
     

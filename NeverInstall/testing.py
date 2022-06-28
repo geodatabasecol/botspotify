@@ -1,40 +1,25 @@
-import time
+from re import A
 
-def acction_tinytask ():
-    def estatus_ventana_activa():
-        with open("ModuloTinyTask/status_ventana.txt") as archivo:
-            resul =archivo.read()
-        
-        if resul== "0":
-            return True
 
-        if resul=="1":
-            return False
+class perro:     
+    def __ini__(self):
+        self.a=5
+        self.b=2
+        self.c=0
+    def verificabotonbuildingapp(self,a,b,c):
+            self.a=a
+            self.b=b
+            self.c=c
+            try:
+                self.c=a/b
+                return True
+            except :
 
-    a= estatus_ventana_activa()
-    
-    while a==False:
-        print ("Estatus ventana activa false")
-        time.sleep(0.3)
-        a= estatus_ventana_activa()
+                return False      
 
-    archivo= open("ModuloTinyTask/status_ventana.txt", "w") 
-    archivo.write("1")  
-    archivo.close()
- 
-    print ("Iniciando realizar  funciones en la ventana ")
-    
-    print ("Haciendo focus en la ventana")
-    a= estatus_ventana_activa()
-    print(a)
-    time.sleep(30)
-    print(a)
-    print ("Terminando  funciones en la ventana status ventana ") 
-    archivo= open("ModuloTinyTask/status_ventana.txt", "w") 
-    archivo.write("0")  
-    archivo.close()
-    time.sleep(5)
-    a= estatus_ventana_activa()
-    print(a)
+nuevoperro=perro()
+a=nuevoperro.verificabotonbuildingapp(5,2,0)
+if a:
+    print (a)
 
-acction_tinytask()
+else: print(a)
