@@ -1,36 +1,41 @@
 
 import time
-from Modulo_Selenium.Tabs import countTabs
-from Modulo_neverInstall.evaluar import evaluacion1
-from Modulo_neverInstall.homeweb import *
+
+
+
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 from selenium.common.exceptions import TimeoutException
-from Modulo_neverInstall.SingIn.singingoogle import *
-from Modulo_Selenium.Crear_driver import *
+
+
 class home:
         def __init__(self,driver) -> None:
             self.driver=driver
-            self.botonhomelaunch=False
+            self._botonhomelaunch=""
         def estadodebotonenhomeNorthAmerica(self):
             try:
                 def verificabotoncreate (self):
                     try:
-                        (WebDriverWait(self.driver, 1)
-                        .until(expected_conditions.element_to_be_clickable((By.LINK_TEXT, "Create an app")))
+                        (WebDriverWait(self.driver, 0.5)
+                        .until(expected_conditions.visibility_of_element_located((By.XPATH, ''))) 
                         )    
+                        print ("true boton create app")
                         return True
+
                     except :
+                        print ("falseeeeeeeeeee")
                         return False
 
 
                 def verificabotonresumenapp(self):
                     try:
-                        (WebDriverWait(self.driver, 1)
-                        .until(expected_conditions.element_to_be_clickable((By.LINK_TEXT, "Resume app")))
+                        (WebDriverWait(self.driver, 0.5)
+                            .until(expected_conditions.visibility_of_element_located((By.XPATH, '//*[@id="__next"]/div/main/div[2]/div/div/div/div/div[2]/div[2]/div/div/div[6]/div[1]/div/div/button'))) 
+                        
                         )
+                        print ("true texto resumen app")
                         return True
                     except :
                         print ("linea 35 no se encontro el texto: Resume app")
@@ -38,8 +43,8 @@ class home:
 
                 def verificabotonresumenapp2(self):
                     try:
-                        (WebDriverWait(self.driver, 1)
-                        .until(expected_conditions.element_to_be_clickable((By.LINK_TEXT, "Paused in North America")))
+                        (WebDriverWait(self.driver, 0.5)
+                        .until(expected_conditions.visibility_of_element_located((By.LINK_TEXT, '//*[@id="__next"]/div/main/div[2]/div/div/div/div/div[2]/div[2]/div/div/div[1]/div[1]/div/div[2]/div/div[1]')))
                         )
                         return True
                     except :
@@ -47,8 +52,8 @@ class home:
                         return False         
                 def verificabotonbuildingapp(self):
                     try:
-                        (WebDriverWait(self.driver, 1)
-                        .until(expected_conditions.element_to_be_clickable((By.LINK_TEXT, "Building in North America")))
+                        (WebDriverWait(self.driver, 0.5)
+                        .until(expected_conditions.visibility_of_element_located((By.LINK_TEXT, "Building in North America")))
                         )
                         return True
                     except :
@@ -57,8 +62,8 @@ class home:
 
                 def verificabotonopenapp(self):
                     try:
-                        (WebDriverWait(self.driver, 1)
-                        .until(expected_conditions.element_to_be_clickable((By.LINK_TEXT, "Open in browser")))   
+                        (WebDriverWait(self.driver, 0.5)
+                        .until(expected_conditions.visibility_of_element_located((By.LINK_TEXT, "Open in browser")))   
                         )                                                                                                                  
                         return True
                     except :
@@ -66,8 +71,8 @@ class home:
                         return False
                 def verificabotonopenapp2(self):
                     try:
-                        (WebDriverWait(self.driver, 1)
-                        .until(expected_conditions.element_to_be_clickable((By.LINK_TEXT, "Running in North America")))   
+                        (WebDriverWait(self.driver, 0.5)
+                        .until(expected_conditions.visibility_of_element_located((By.LINK_TEXT, "Running in North America")))   
                         )                                                                                                                  
                         return True
                     except :
@@ -78,21 +83,21 @@ class home:
                 print ("error homeweb 20-48 ")
                 return False
 
-            if verificabotoncreate (self): botonhomelaunch = "boton_createAPP" 
-            elif verificabotonresumenapp (self):botonhomelaunch = "boton_resumen"
-            elif verificabotonresumenapp2 (self):botonhomelaunch = "boton_resumen"
-            elif verificabotonbuildingapp (self): botonhomelaunch = "boton_buildingAPP"
-            elif verificabotonopenapp (self): botonhomelaunch = "boton_openAPP"
-            elif verificabotonopenapp2 (self):  botonhomelaunch = "boton_openAPP"
-            else: botonhomelaunch=False
-            return botonhomelaunch
+            if verificabotoncreate (self): self._botonhomelaunch = "boton_createAPP" 
+            elif verificabotonresumenapp (self):self._botonhomelaunch = "boton_resumen"
+            elif verificabotonresumenapp2 (self):self._botonhomelaunch = "boton_resumen"
+            elif verificabotonbuildingapp (self): self._botonhomelaunch = "boton_buildingAPP"
+            elif verificabotonopenapp (self): self._botonhomelaunch = "boton_openAPP"
+            elif verificabotonopenapp2 (self):  self._botonhomelaunch = "boton_openAPP"
+            else: self._botonhomelaunch=False
+            return self._botonhomelaunch
 
         def estadodebotonenhomeEurope(self):
             try:
                 def verificabotoncreate (self):
                     try:
-                        (WebDriverWait(self.driver, 1)
-                        .until(expected_conditions.element_to_be_clickable((By.LINK_TEXT, "Create an app")))
+                        (WebDriverWait(self.driver, 0.5)
+                        .until(expected_conditions.visibility_of_element_located((By.LINK_TEXT, "Create an app")))
                         )    
                         return True
                     except :
@@ -101,8 +106,8 @@ class home:
 
                 def verificabotonresumenapp(self):
                     try:
-                        (WebDriverWait(self.driver, 1)
-                        .until(expected_conditions.element_to_be_clickable((By.LINK_TEXT, "Resume app")))
+                        (WebDriverWait(self.driver, 0.5)
+                        .until(expected_conditions.visibility_of_element_located((By.LINK_TEXT, "Resume app")))
                         )
                         return True
                     except :
@@ -111,8 +116,8 @@ class home:
 
                 def verificabotonresumenapp2(self):
                     try:
-                        (WebDriverWait(self.driver, 1)
-                        .until(expected_conditions.element_to_be_clickable((By.LINK_TEXT, "Paused in Europe")))
+                        (WebDriverWait(self.driver, 0.5)
+                        .until(expected_conditions.visibility_of_element_located((By.LINK_TEXT, "Paused in Europe")))
                         )
                         return True
                     except :
@@ -120,8 +125,8 @@ class home:
                         return False         
                 def verificabotonbuildingapp(self):
                     try:
-                        (WebDriverWait(self.driver, 1)
-                        .until(expected_conditions.element_to_be_clickable((By.LINK_TEXT, "Building in Europe")))
+                        (WebDriverWait(self.driver, 0.5)
+                        .until(expected_conditions.visibility_of_element_located((By.LINK_TEXT, "Building in Europe")))
                         )
                         return True
                     except :
@@ -130,8 +135,8 @@ class home:
 
                 def verificabotonopenapp(self):
                     try:
-                        (WebDriverWait(self.driver, 1)
-                        .until(expected_conditions.element_to_be_clickable((By.LINK_TEXT, "Open in browser")))   
+                        (WebDriverWait(self.driver, 0.5)
+                        .until(expected_conditions.visibility_of_element_located((By.LINK_TEXT, "Open in browser")))   
                         )                                                                                                                  
                         return True
                     except :
@@ -139,8 +144,8 @@ class home:
                         return False
                 def verificabotonopenapp2(self):
                     try:
-                        (WebDriverWait(self.driver, 1)
-                        .until(expected_conditions.element_to_be_clickable((By.LINK_TEXT, "Running in Europe")))   
+                        (WebDriverWait(self.driver, 0.5)
+                        .until(expected_conditions.visibility_of_element_located((By.LINK_TEXT, "Running in Europe")))   
                         )                                                                                                                  
                         return True
                     except :
@@ -151,14 +156,14 @@ class home:
                 print ("error homeweb 20-48 ")
                 return False
 
-            if verificabotoncreate (self): botonhomelaunch = "boton_createAPP" 
-            elif verificabotonresumenapp (self):botonhomelaunch = "boton_resumen"
-            elif verificabotonresumenapp2 (self):botonhomelaunch = "boton_resumen"
-            elif verificabotonbuildingapp (self): botonhomelaunch = "boton_buildingAPP"
-            elif verificabotonopenapp (self): botonhomelaunch = "boton_openAPP"
-            elif verificabotonopenapp2 (self):  botonhomelaunch = "boton_openAPP"
-            else: botonhomelaunch=False
-            return botonhomelaunch
+            if verificabotoncreate (self): self._botonhomelaunch = "boton_createAPP" 
+            elif verificabotonresumenapp (self):self._botonhomelaunch = "boton_resumen"
+            elif verificabotonresumenapp2 (self):self._botonhomelaunch = "boton_resumen"
+            elif verificabotonbuildingapp (self): self._botonhomelaunch = "boton_buildingAPP"
+            elif verificabotonopenapp (self): self._botonhomelaunch = "boton_openAPP"
+            elif verificabotonopenapp2 (self):  self._botonhomelaunch = "boton_openAPP"
+            else: self._botonhomelaunch=False
+            return self._botonhomelaunch
 
 
 

@@ -25,7 +25,7 @@ from selenium import *
 lock=Lock()
 
 contador1=0
-numero_multitareas=1
+numero_multitareas=3
 sleep=[1, 3, 5, 7, 9 ,11, 13]
 
 #funcion que lanza los multihilos y actualiza el estado de la acc a 1 si finaliza todo ok.
@@ -77,9 +77,10 @@ def func(threads,id,emails, password,accname,acc_estado,acc_count,acc_region,sle
   if estado_botones==False:
     print("No se encontro ningun estado de boton en NortAmerica")
     estado_botones=estado_home.estadodebotonenhomeEurope()
-  if estado_botones==False:
+  
+  elif estado_botones==False:
     print("No se encontro ningun estado de boton en Europa")
-
+  print ("Estado del boton en home es:", estado_home._botonhomelaunch)
   time.sleep(20)
   driver.close()
   threads.wait()
