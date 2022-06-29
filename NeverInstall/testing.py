@@ -1,25 +1,12 @@
-from re import A
+from Modulo_Selenium.Crear_driver import crear_driver
 
 
-class perro:     
-    def __ini__(self):
-        self.a=5
-        self.b=2
-        self.c=0
-    def verificabotonbuildingapp(self,a,b,c):
-            self.a=a
-            self.b=b
-            self.c=c
-            try:
-                self.c=a/b
-                return True
-            except :
+driver =crear_driver()
+from selenium.webdriver.support.ui import WebDriverWait
+def document_initialised(driver):
+    return driver.execute_script("return initialised")
 
-                return False      
-
-nuevoperro=perro()
-a=nuevoperro.verificabotonbuildingapp(5,2,0)
-if a:
-    print (a)
-
-else: print(a)
+driver.navigate("file:///race_condition.html")
+WebDriverWait(driver, timeout=10).until(document_initialised)
+el = driver.find_element(By.TAG_NAME, "p")
+assert el.text == "Hello from JavaScript!"
