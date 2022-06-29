@@ -70,8 +70,6 @@ def func(threads,id,emails, password,accname,acc_estado,acc_count,acc_region,sle
   print ("Ingresando correo", accname)
   singupneverinstall.ingresandocontrasena()
   barrier.wait()
-  print ("Ingresando correo", accname)
-  barrier.wait()
 
   Tabs=countTabs(driver)
   estado_home = home(driver)
