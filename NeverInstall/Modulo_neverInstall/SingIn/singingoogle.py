@@ -4,12 +4,17 @@ import time
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 
- # INICIO A HACER LOGIN con google
+from ModuloEventosWindows.focus_google import cWindow
+# INICIO A HACER LOGIN con google
 class singinggoogle:
-    def __init__ (self,driver,emails,password):
+    def __init__ (self,driver,emails,password,accname,barrier,url_inicial,commandWindows):
         self.driver=driver
         self.email=emails
         self.password= password
+        self.accname=accname
+        self.barrier=barrier
+        self.url_inicial=url_inicial
+        self.commandWindows=commandWindows
    
 # ingresando con GOOGLE           
     def iniciarcongoogle(self):
@@ -137,3 +142,38 @@ class singinggoogle:
         
         return True
     
+    def primerpasoiniciarlogingoogle(self):
+        url =f"https://"+self.accname+".com"
+        try:
+            self.driver.get(url)
+        
+        except :
+            pass
+        time.sleep(3)
+        nombreventana= (str.lower(self.accname)+'.com')
+           
+        self.commandWindows.find_window_wildcard(nombreventana)
+        print(self.accname , " ",self.commandWindows.valorhwnd(), " ")
+        self.barrier.wait()
+        print("Todas las ventanas cargadas... \nIniciando Load NeverInstall...") 
+        try:
+            self.driver.get(self.url_inicial)
+            time.sleep(1)
+  #
+        except :
+
+            pass
+        self.barrier.wait()
+        print("Load NeverInstall.com ",self.accname)
+
+        #commandWindows.hacerfocusenlaventana(accname)
+        time.sleep(5)    
+        
+        self.iniciarcongoogle()
+        print("Singup con google", self.accname)
+        self.barrier.wait()
+        self.ingresandocorreo()
+        self.barrier.wait()
+        print ("Ingresando correo", self.accname)
+        self.ingresandocontrasena()
+        self.barrier.wait()

@@ -11,7 +11,6 @@ import time
 from threading import Thread, Barrier, Lock
 
 from ModuloEventosWindows.focus_google import *
-from Modulo_neverInstall.SingIn.singingoogle import *
 from Modulo_Selenium.Crear_driver import *
 from Modulo_Selenium.Tabs import *
 from Modulo_neverInstall.estados_home import *
@@ -24,7 +23,7 @@ from selenium import *
 
 lock=Lock()
 
-contador1=0
+ventanaactiva=0
 numero_multitareas=3
 sleep=[1, 3, 5, 7, 9 ,11, 13]
 
@@ -34,57 +33,53 @@ url_inicial='https://neverinstall.com/signin'
 
 
 def func(threads,id,emails, password,accname,acc_estado,acc_count,acc_region,sleep,locke,i):
-  global contador1
-  url =f"https://"+accname+".com"
-  driver =crear_driver()
-  try:
-      driver.get(url)
-  #driver =crear_driver(url_inicial)
-  except :
-      pass
-  time.sleep(3)
-  nombreventana= (str.lower(accname)+'.com')
-  commandWindows= cWindow()    
-  commandWindows.find_window_wildcard(nombreventana)
-  print(accname , " ",commandWindows.valorhwnd(), " ")
-  barrier.wait()
-  print("Todas las ventanas cargadas... \nIniciando Load NeverInstall...") 
-  try:
-      driver.get(url_inicial)
-      time.sleep(1)
-  #
-  except :
-
-      pass
-  barrier.wait()
-  print("Load NeverInstall.com ",accname)
-
-  #commandWindows.hacerfocusenlaventana(accname)
-  time.sleep(5)    
-  singupneverinstall=singinggoogle(driver, emails,password)
-  singupneverinstall.iniciarcongoogle()
-  print("Singup con google", accname)
-  barrier.wait()
-  singupneverinstall.ingresandocorreo()
-  barrier.wait()
-  print ("Ingresando correo", accname)
-  singupneverinstall.ingresandocontrasena()
-  barrier.wait()
-
-  Tabs=countTabs(driver)
-  estado_home = home(driver)
-  estado_botones=estado_home.estadodebotonenhomeNorthAmerica()
-  if estado_botones==False:
-    print("No se encontro ningun estado de boton en NortAmerica")
-    estado_botones=estado_home.estadodebotonenhomeEurope()
+  global ventanaactiva
   
-  elif estado_botones==False:
-    print("No se encontro ningun estado de boton en Europa")
-  print ("Estado del boton en home es:", estado_home._botonhomelaunch)
-  time.sleep(20)
-  driver.close()
-  threads.wait()
+  driver =crear_driver()  #Crea un ombjeto de la clase driver selenium
+  commandWindows= cWindow() 
+  singupneverinstall=singinggoogle(driver, emails,password,accname,barrier,url_inicial,commandWindows) #Crea un objeto para loging google
+  
+  singupneverinstall.primerpasoiniciarlogingoogle() #Llama a la funcion que hace loging en neverinstall 
+  barrier.reset()
+  print("Verificando estado inicial de home", accname)
+  #La clase home verifica el estado de los botones en home de neverinstall.com para Nort America, Europe
+  #Funcion que retorna el estado de los botones ("boton_createAPP", "boton_resumen", "boton_openAPP", "boton_buildingAPP")
+  estado_home = home(driver,accname)  
+    
+ 
+  estado_home.accioninicialenhome()
 
+  print ("Primer paso OK... verificando numero de TABS")
+  tabs=tabcontrol(driver)
+  tabs.countTabs()
+  print (len(tabs.count_Tabs))
+  print (type(len(tabs.count_Tabs)))
+  if len(tabs.count_Tabs)==2:
+    tabs.switch_to_vscodeTab()
+    print ("Tab actual VS CODE")
+  else:
+    print ("No se cargo VS CODE")
+    estado_home.clickboton_openAPP()
+  
+  
+  
+  while ventanaactiva ==0:
+    lock.acquire()
+    ventanaactiva=id
+    commandWindows.hacerfocusenlaventana()
+    print ("focus ventana", accname)
+    lock.release()
+
+
+    break
+  print ("continua condigo....")
+  
+
+  
+  #Tabs=countTabs(driver)
+
+  time.sleep(40)
+  threads.wait()
 
 '''
 

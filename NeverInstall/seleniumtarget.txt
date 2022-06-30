@@ -1,3 +1,5 @@
+<a aria-label="buttonLink" href="/spaces" class="sc-4fa61142-1 gkswXJ" style="color: var(--pure-white); padding: 8px 14px; width: fit-content; margin-top: 28px;">Create an app</a>
+
 <button aria-label="button" class="sc-3dd55e7f-0 icxMxb" style="cursor: pointer; width: 100%;"><div class="sc-dcfcb38c-1 lfrIcM"><span class="sc-dcfcb38c-3 fBCagd">Resume app</span><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" color="var(--secondary-cta-new)" class="sc-dcfcb38c-4 hVlAtn" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" style="color: var(--secondary-cta-new);"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div></button>
 
 
@@ -28,8 +30,24 @@ driver.find_element_by_xpath("//*[@id="__next"][contains(text(),\
 //*[@id="__next"]/div/main/div[2]/div/div/div/div/div[2]/div[2]/div/div/div[1]/div[1]/div/div/div/div[1]
 
 
-<div class="sc-47293d06-4 jeolln">Running in North America</div>
-//*[@id="__next"]/div/main/div[2]/div/div/div/div/div[2]/div[2]/div/div/div[1]/div[1]/div/div[2]/div/div[1]
+<div class="sc-47293d06-4 jeolln">Running in Europe</div>
 
+
+BOTONES SPAN
+
+<span class="sc-dcfcb38c-2 dKFIhM">Open in browser</span>
+
+<span class="sc-dcfcb38c-3 fBCagd">Resume app</span>
+<span class="sc-dcfcb38c-3 fBCagd">Resume app</span>
+
+<span class="sc-d17e366e-2 ccnidS">99%</span>
+<div role="progressbar" class="progress-bar" aria-valuenow="97" aria-valuemin="0" aria-valuemax="100" style="width: 97%;"></div>
+
+
+MENSAJES 
+
+<div class="sc-47293d06-4 dlSMgc">Building in North America</div>
+
+<div class="sc-47293d06-4 gFuLnL">Paused in North America</div>
 
 
