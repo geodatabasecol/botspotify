@@ -12,6 +12,7 @@ import pymongo
 
 
 
+
 client = pymongo.MongoClient("mongodb+srv://silklips:!Fps91507856@mycrypta.ugxec.mongodb.net/?retryWrites=true&w=majority")
 db = client["accounts"]
 client.server_info()

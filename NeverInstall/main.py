@@ -21,7 +21,7 @@ from Modulo_DB.Never_install.DB_Never_Install import *
 from Modulo_DB.Never_install.DB_TinyTask import *
 from selenium import *
 import pyautogui as pyauto
-
+import pygetwindow as gw
 lock=Lock()
 
 ventanaactiva=0
@@ -37,11 +37,13 @@ def func(threads,id,emails, password,accname,acc_estado,acc_count,acc_region,sle
   global ventanaactiva
   
   driver =crear_driver()  #Crea un ombjeto de la clase driver selenium
-  commandWindows= cWindow() 
+  
+  commandWindows= cWindow(accname) 
   singupneverinstall=singinggoogle(driver, emails,password,accname,barrier,url_inicial,commandWindows) #Crea un objeto para loging google
   
   singupneverinstall.primerpasoiniciarlogingoogle() #Llama a la funcion que hace loging en neverinstall 
-  barrier.reset()
+  #commandWindows.setActWin()
+  
   print("Verificando estado inicial de home", accname)
   #La clase home verifica el estado de los botones en home de neverinstall.com para Nort America, Europe
   #Funcion que retorna el estado de los botones ("boton_createAPP", "boton_resumen", "boton_openAPP", "boton_buildingAPP")
@@ -52,8 +54,9 @@ def func(threads,id,emails, password,accname,acc_estado,acc_count,acc_region,sle
   while len(tabs.count_Tabs)==1:
     print ("No se cargo VS CODE",accname)
     estado_home.accioninicialenhome()
-    tabs.countTabs()
-    time.sleep(1) 
+    time.sleep(1)
+    if len(tabs.countTabs())==2:
+      break
 
   
   print ("Primer paso OK... verificando numero de TABS")
@@ -72,8 +75,11 @@ def func(threads,id,emails, password,accname,acc_estado,acc_count,acc_region,sle
   while ventanaactiva ==0:
     try:
       ventanaactiva=id
-      commandWindows.hacerfocusenlaventana(accname)
+      commandWindows.setActWin()
       print ("focus ventana", accname)
+      pyauto.position(x=305, y=158)
+      pyauto.click(x=305, y=158)
+
       #tessst eeeeeeee
       #test ste 
       

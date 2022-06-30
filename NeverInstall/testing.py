@@ -1,6 +1,29 @@
+from importlib.machinery import EXTENSION_SUFFIXES
 import time
-import  pyautogui as pyauto
+import pygetwindow as gw
 
-while  (pyauto.position()):
-    (pyauto.click(x=305, y=158))
-    time.sleep(5)
+#print(gw.getAllTitles())
+#print(gw.getWindowsAt(10, 10))
+
+
+notepadWindow = gw.getWindowsWithTitle('2.com')[0]
+notepadWindow.activate()
+
+time.sleep(1)
+notepadWindow = gw.getWindowsWithTitle('3.com')[0]
+notepadWindow.activate()
+
+time.sleep(1)
+notepadWindow = gw.getWindowsWithTitle('4.com')[0]
+notepadWindow.activate()
+
+time.sleep(1)
+notepadWindow = gw.getWindowsWithTitle('5.com')[0]
+notepadWindow.activate()
+
+time.sleep(1)
+notepadWindow = gw.getWindowsWithTitle('6.com')[0]
+notepadWindow.activate()
+time.sleep(1)
+notepadWindow = gw.getWindowsWithTitle('2.com')[0]
+notepadWindow.activate()

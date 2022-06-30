@@ -4,6 +4,7 @@ import time
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 
+
 from ModuloEventosWindows.focus_google import cWindow
 # INICIO A HACER LOGIN con google
 class singinggoogle:
@@ -22,7 +23,7 @@ class singinggoogle:
             global count1
             try:
                 self.driver.find_element(By.XPATH, XPATH)
-            except NoSuchElementException:
+            except :
                 if count1<=3: 
                     count1+=1
                     print (count1)
@@ -50,7 +51,7 @@ class singinggoogle:
             global count1
             try:
                 self.driver.find_element(By.ID, ID_)
-            except NoSuchElementException:
+            except :
                 if count1<=3: 
                     count1+=1
                     return time.sleep(1), check_exist_by_ID_sendkey(ID_,send_keys_)
@@ -75,7 +76,7 @@ class singinggoogle:
             global count1
             try:
                 self.driver.find_element(By.XPATH, XPATH)
-            except NoSuchElementException:
+            except :
                 if count1<=3: 
                     count1+=1
                     print (count1)
@@ -101,7 +102,7 @@ class singinggoogle:
             global count1
             try:
                 self.driver.find_element(By.XPATH, XPATH)
-            except NoSuchElementException:
+            except :
                 if count1<=3: 
                     count1+=1
                     print (count1)
@@ -123,7 +124,7 @@ class singinggoogle:
             global count1
             try:
                 self.driver.find_element(By.XPATH, XPATH)
-            except NoSuchElementException:
+            except :
                 if count1<=3: 
                     count1+=1
                     print (count1)
@@ -149,13 +150,13 @@ class singinggoogle:
         
         except :
             pass
-        time.sleep(3)
-        nombreventana= (str.lower(self.accname)+'.com')
-           
-        self.commandWindows.find_window_wildcard(nombreventana)
-        print(self.accname , " ",self.commandWindows.valorhwnd(), " ")
-        self.barrier.wait()
-        print("Todas las ventanas cargadas... \nIniciando Load NeverInstall...") 
+        
+        
+        self.commandWindows.find_window()
+        self.commandWindows.setActWin()
+        
+        time.sleep(1)
+        
         try:
             self.driver.get(self.url_inicial)
             time.sleep(1)
