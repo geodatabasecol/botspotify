@@ -104,7 +104,8 @@ class home:
             print("Click botonResumenAPP",self._accname)
         except :
                 self.accioninicialenhome()
-                
+        if  self.clickbotonresumn==False:
+            self.clickbotonresumenapp()                 
    
     def building(self):
         a= self.verificabotonbuildingapp()
@@ -113,6 +114,8 @@ class home:
             time.sleep(7)
             a=self.verificabotonbuildingapp()
         time.sleep(1)
+        
+     
 
 
     def clickboton_openAPP(self):

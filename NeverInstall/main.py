@@ -20,11 +20,12 @@ from Modulo_DB.DB_conect import *
 from Modulo_DB.Never_install.DB_Never_Install import *
 from Modulo_DB.Never_install.DB_TinyTask import *
 from selenium import *
+import pyautogui as pyauto
 
 lock=Lock()
 
 ventanaactiva=0
-numero_multitareas=3
+numero_multitareas=7
 sleep=[1, 3, 5, 7, 9 ,11, 13]
 
 #funcion que lanza los multihilos y actualiza el estado de la acc a 1 si finaliza todo ok.
@@ -46,41 +47,52 @@ def func(threads,id,emails, password,accname,acc_estado,acc_count,acc_region,sle
   #Funcion que retorna el estado de los botones ("boton_createAPP", "boton_resumen", "boton_openAPP", "boton_buildingAPP")
   estado_home = home(driver,accname)  
     
- 
-  estado_home.accioninicialenhome()
-
-  print ("Primer paso OK... verificando numero de TABS")
   tabs=tabcontrol(driver)
-  tabs.countTabs()
+  tabs.countTabs() 
+  while len(tabs.count_Tabs)==1:
+    print ("No se cargo VS CODE",accname)
+    estado_home.accioninicialenhome()
+    tabs.countTabs()
+    time.sleep(1) 
+
+  
+  print ("Primer paso OK... verificando numero de TABS")
+
   print (len(tabs.count_Tabs))
   print (type(len(tabs.count_Tabs)))
-  if len(tabs.count_Tabs)==2:
+  
+  while len(tabs.count_Tabs)==2:
     tabs.switch_to_vscodeTab()
-    print ("Tab actual VS CODE")
-  else:
-    print ("No se cargo VS CODE")
-    estado_home.clickboton_openAPP()
-  
-  
-  
-  while ventanaactiva ==0:
-    lock.acquire()
-    ventanaactiva=id
-    commandWindows.hacerfocusenlaventana(accname)
-    print ("focus ventana", accname)
-    #tessst eeeeeeee
-    #test ste 
-    lock.release()
-
-
+    print ("Tab actual VS CODE",accname)
     break
+
+  
+  
+  lock.acquire()
+  while ventanaactiva ==0:
+    try:
+      ventanaactiva=id
+      commandWindows.hacerfocusenlaventana(accname)
+      print ("focus ventana", accname)
+      #tessst eeeeeeee
+      #test ste 
+      
+      break
+    except:
+      print ("Error haciendo focus en la ventana ",accname)
+      ventanaactiva=0
+      break
+  lock.release()
+
+    
   print ("continua condigo....")
   
 
   
   #Tabs=countTabs(driver)
 
-  time.sleep(40)
+  time.sleep(10)
+  driver.close()
   threads.wait()
 
 '''
