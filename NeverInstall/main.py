@@ -66,7 +66,7 @@ def func(threads,id,emails, password,accname,acc_estado,acc_count,acc_region,sle
   while ventanaactiva ==0:
     lock.acquire()
     ventanaactiva=id
-    commandWindows.hacerfocusenlaventana()
+    commandWindows.hacerfocusenlaventana(accname)
     print ("focus ventana", accname)
     #tessst eeeeeeee
     #test ste 
