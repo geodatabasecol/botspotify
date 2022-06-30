@@ -68,6 +68,7 @@ def func(threads,id,emails, password,accname,acc_estado,acc_count,acc_region,sle
     ventanaactiva=id
     commandWindows.hacerfocusenlaventana()
     print ("focus ventana", accname)
+    #tessst aaaaaaaadasdasdas
     lock.release()
 
 
