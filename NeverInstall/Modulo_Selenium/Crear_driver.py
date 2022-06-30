@@ -19,7 +19,7 @@ def crear_driver():
     opt.add_argument('--disable-infobars')    
     opt.add_argument("--incognito")   
     opt.add_argument('--disable-gpu')
-    opt.add_experimental_option("excludeSwitches", ["enable-logging"])
+    opt.add_experimental_option("excludeSwitches", ["enable-logging",'enable-automation'])
     # prefs = {"profile.managed_default_content_settings.images": 2,
     #          'notifications': 2,
     #          }

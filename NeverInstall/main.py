@@ -22,6 +22,8 @@ from Modulo_DB.Never_install.DB_TinyTask import *
 from selenium import *
 import pyautogui as pyauto
 import pygetwindow as gw
+
+from Modulo_Selenium.mousecontrol import *
 lock=Lock()
 
 ventanaactiva=0
@@ -37,13 +39,13 @@ def func(threads,id,emails, password,accname,acc_estado,acc_count,acc_region,sle
   global ventanaactiva
   
   driver =crear_driver()  #Crea un ombjeto de la clase driver selenium
-  
-  commandWindows= cWindow(accname) 
-  singupneverinstall=singinggoogle(driver, emails,password,accname,barrier,url_inicial,commandWindows) #Crea un objeto para loging google
+  driver.maximize_window()
+   
+  singupneverinstall=singinggoogle(driver, emails,password,accname,barrier,url_inicial) #Crea un objeto para loging google
   
   singupneverinstall.primerpasoiniciarlogingoogle() #Llama a la funcion que hace loging en neverinstall 
   #commandWindows.setActWin()
-  
+  driver.minimize_window()
   print("Verificando estado inicial de home", accname)
   #La clase home verifica el estado de los botones en home de neverinstall.com para Nort America, Europe
   #Funcion que retorna el estado de los botones ("boton_createAPP", "boton_resumen", "boton_openAPP", "boton_buildingAPP")
@@ -61,44 +63,47 @@ def func(threads,id,emails, password,accname,acc_estado,acc_count,acc_region,sle
   
   print ("Primer paso OK... verificando numero de TABS")
 
-  print (len(tabs.count_Tabs))
-  print (type(len(tabs.count_Tabs)))
-  
+
   while len(tabs.count_Tabs)==2:
     tabs.switch_to_vscodeTab()
     print ("Tab actual VS CODE",accname)
     break
 
-  
+  '''
+  miclick=mousecontrol()
   
   lock.acquire()
   while ventanaactiva ==0:
     try:
       ventanaactiva=id
-      commandWindows.setActWin()
-      print ("focus ventana", accname)
-      pyauto.position(x=305, y=158)
-      pyauto.click(x=305, y=158)
+      driver.maximize_window()
+      time.sleep(3)
+      miclick.primerclick()
+      time.sleep(3)
+      miclick.segundoclick()
+      time.sleep(3)
+      miclick.segundoclick()
+      time.sleep(3)     
+      driver.minimize_window()
 
-      #tessst eeeeeeee
-      #test ste 
-      
+      ventanaactiva=0
+
       break
     except:
       print ("Error haciendo focus en la ventana ",accname)
       ventanaactiva=0
       break
   lock.release()
-
+  '''
     
-  print ("continua condigo....")
+  print ("continua condigo....",accname)
   
 
   
   #Tabs=countTabs(driver)
 
   time.sleep(10)
-  driver.close()
+
   threads.wait()
 
 '''

@@ -1,29 +1,35 @@
-from importlib.machinery import EXTENSION_SUFFIXES
 import time
-import pygetwindow as gw
+from turtle import position
+import pyautogui as pyauto 
 
-#print(gw.getAllTitles())
-#print(gw.getWindowsAt(10, 10))
+class mousecontrol:
+    def __init__(self) -> None:
+        pass
+    def primerclick(self):
+        pyauto.position(x=305, y=158)
+        pyauto.click(x=305, y=158)
+
+    def segundoclick(self):
+        pyauto.position(x=305, y=148)
+        pyauto.click(x=305, y=148)   
+    
+    def tercerclick(self):
+        pyauto.position(x=1365, y=645)
+        pyauto.click(x=1365, y=645)      
+    
+    def obtener(self):
+        while pyauto.position():
+            print(pyauto.position())
+mitest= mousecontrol()
 
 
-notepadWindow = gw.getWindowsWithTitle('2.com')[0]
-notepadWindow.activate()
-
-time.sleep(1)
-notepadWindow = gw.getWindowsWithTitle('3.com')[0]
-notepadWindow.activate()
-
-time.sleep(1)
-notepadWindow = gw.getWindowsWithTitle('4.com')[0]
-notepadWindow.activate()
-
-time.sleep(1)
-notepadWindow = gw.getWindowsWithTitle('5.com')[0]
-notepadWindow.activate()
-
-time.sleep(1)
-notepadWindow = gw.getWindowsWithTitle('6.com')[0]
-notepadWindow.activate()
-time.sleep(1)
-notepadWindow = gw.getWindowsWithTitle('2.com')[0]
-notepadWindow.activate()
+time.sleep(15)
+mitest.primerclick()
+mitest.primerclick()
+time.sleep(3)
+mitest.segundoclick()
+mitest.segundoclick()
+time.sleep(3)
+mitest.tercerclick()
+mitest.tercerclick()
+time.sleep(3)  

@@ -8,14 +8,14 @@ from selenium.common.exceptions import NoSuchElementException
 from ModuloEventosWindows.focus_google import cWindow
 # INICIO A HACER LOGIN con google
 class singinggoogle:
-    def __init__ (self,driver,emails,password,accname,barrier,url_inicial,commandWindows):
+    def __init__ (self,driver,emails,password,accname,barrier,url_inicial):
         self.driver=driver
         self.email=emails
         self.password= password
         self.accname=accname
         self.barrier=barrier
         self.url_inicial=url_inicial
-        self.commandWindows=commandWindows
+        
    
 # ingresando con GOOGLE           
     def iniciarcongoogle(self):
@@ -144,25 +144,14 @@ class singinggoogle:
         return True
     
     def primerpasoiniciarlogingoogle(self):
-        url =f"https://"+self.accname+".com"
-        try:
-            self.driver.get(url)
-        
-        except :
-            pass
-        
-        
-        self.commandWindows.find_window()
-        self.commandWindows.setActWin()
-        
-        time.sleep(1)
+
         
         try:
             self.driver.get(self.url_inicial)
             time.sleep(1)
   #
         except :
-
+        
             pass
         self.barrier.wait()
         print("Load NeverInstall.com ",self.accname)

@@ -111,7 +111,7 @@ class home:
         a= self.verificabotonbuildingapp()
         while a==True:
             print("Building....",self._accname)
-            time.sleep(7)
+            time.sleep(15)
             a=self.verificabotonbuildingapp()
         time.sleep(1)
         
