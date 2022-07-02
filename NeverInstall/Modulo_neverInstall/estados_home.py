@@ -6,14 +6,18 @@ import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions
+import asyncio
 
 class home:
+    
     def __init__(self,driver,accname) -> None:
             self.driver=driver
             self.clickbotonopenAPP=False
             self.clickbotonresumn=False
             self._accname=accname
             self._regiondelservidor=""
+            
+
 
     def verificabotoncreate (self):
                     try:
@@ -21,22 +25,25 @@ class home:
                         .until(expected_conditions.visibility_of_element_located((By.XPATH, "// a[contains(text(),\'Create an app')]"))) 
                         )    
                         self._botonhomelaunch="Create an app"
+                        
                         return True
 
                     except :
                         
                         return False
+                        
 
-    def verificabotonresumenapp(self):
+    async def verificabotonresumenapp(self):
                     try:
                         (WebDriverWait(self.driver, 0.1)
-                            .until(expected_conditions.visibility_of_element_located((By.XPATH, "// span[contains(text(),\'Resume app')]"))) 
+                            .until(expected_conditions.visibility_of_element_located((By.XPATH, '//*[@id="__next"]/div/main/div[2]/div/div/div/div/div/div[2]/div/div/div[6]/div[1]/div/div/button'))) 
                         )
-                        self._botonhomelaunch="Resume app"
+                        
                         return True
                     except :
+                        
                         return False
-
+                    
     def verificabotonresumenapp2(self):
                     try:
                         (WebDriverWait(self.driver, 0.1)
@@ -61,9 +68,11 @@ class home:
                         (WebDriverWait(self.driver, 0.1)
                         .until(expected_conditions.visibility_of_element_located((By.XPATH, "// span[contains(text(),\'Open in browser')]"))) 
                         )
-                        self._botonhomelaunch="Open in browser"                                                                                                                  
+                        self._botonhomelaunch="Open in browser"    
+                                                                                                                                    
                         return True
                     except :
+                        
                         return False
 
     def verificabotonopenapp2(self):
@@ -78,61 +87,82 @@ class home:
 
 
 
-    def accioninicialenhome(self):
-        if self.verificabotoncreate()==True:
-            print("Boton Create APP..",self._accname)
-            self.driver.close()
-            return False
-        if self.verificabotonresumenapp()==True:
-           self.clickbotonresumenapp()
+    async def accioninicialenhome(self,ventanaactiva):
+        taskverificabotonresumen= asyncio.create_task(self.verificabotonresumenapp())
+        task_taskverificabotonresumen= await taskverificabotonresumen
+        print(f"Boton resumen{self._accname} : {task_taskverificabotonresumen}")
+        if task_taskverificabotonresumen==True:
+           task_clickbotonresumen =asyncio.create_task(self.clickbotonresumenapp(ventanaactiva))
+
+           ventanaactiva= await task_clickbotonresumen
+        return ventanaactiva
+
+        '''
+
+        task_verificabotonbuildingap=asyncio.create_task(self.verificabotonbuildingapp())
+        val_task_verificabotonbuildingap= await task_verificabotonbuildingap
+        if val_task_verificabotonbuildingap==True:
+            task_build=asyncio.create_task( self.building())
+            await task_build
         
-        if self.verificabotonbuildingapp()==True:
-            
-            self.building()
-        if self.verificabotonopenapp()==True:
-            self.clickboton_openAPP()   
+        task_verificabotonopenapp = asyncio.create_task(self.verificabotonopenapp())
+        val_verificabotonopenapp= await task_verificabotonopenapp
         
-                              
+        if val_verificabotonopenapp==True:
+            task_clickboton_openAPP=asyncio.create_task(self.clickboton_openAPP(ventanaactiva))
+            ventanaactiva=await task_clickboton_openAPP
+        return ventanaactiva
+        '''                                 
         #CLICKS BOTONES
-    def clickbotonresumenapp(self):
+    async def clickbotonresumenapp(self,ventanaactiva):
+        ventanaactiva=1
         try:
             (WebDriverWait(self.driver, 0.1)
-            .until(expected_conditions.element_to_be_clickable((By.XPATH, "// span[contains(text(),\'Resume app')]"))) 
+            .until(expected_conditions.element_to_be_clickable((By.XPATH, '//*[@id="__next"]/div/main/div[2]/div/div/div/div/div/div[2]/div/div/div[6]/div[1]/div/div/button'))) 
             .click()
+            .minimize_window()
             )
             self.clickbotonresumn=True
             print("Click botonResumenAPP",self._accname)
+            await asyncio.sleep(1)
+            return ventanaactiva
         except :
-                self.accioninicialenhome()
-        if  self.clickbotonresumn==False:
-            self.clickbotonresumenapp()                 
-   
-    def building(self):
-        a= self.verificabotonbuildingapp()
-        while a==True:
-            print("Building....",self._accname)
-            time.sleep(15)
-            a=self.verificabotonbuildingapp()
-        time.sleep(1)
+                 taskvolverahome=asyncio.create_task(self.accioninicialenhome(ventanaactiva))
+                 await taskvolverahome
+                 return ventanaactiva
         
-     
 
-
-    def clickboton_openAPP(self):
-        try:
-            (WebDriverWait(self.driver, 0.1)
-            .until(expected_conditions.element_to_be_clickable((By.XPATH, "// span[contains(text(),\'Open in browser')]"))) 
-            ).click()
-            self.clickbotonopenAPP=True   
-            print("Click boton_openAPP",self._accname)
-            
-        except :
-                time.sleep(2)
-                self.clickboton_openAPP()  
+    
+    async def building(self):
+        task_veri_btnbuildingapp= asyncio.create_task(self.verificabotonbuildingapp())
+        val= await task_veri_btnbuildingapp
+        while val==True:
+            print("Building....",self._accname)
+            await asyncio.sleep(20)
+            task_verificabotonbuilapp= asyncio.create_task(self.verificabotonbuildingapp())
+            val= await task_verificabotonbuilapp
+        await asyncio.sleep(1)
+        
+    async def clickboton_openAPP(self,ventanaactiva):
+        
+        while ventanaactiva==0:
+            ventanaactiva=1
+            try:
+                (WebDriverWait(self.driver, 0.1)
+                .until(expected_conditions.element_to_be_clickable((By.XPATH, "// span[contains(text(),\'Open in browser')]"))) 
+                ).click()
+                self.clickbotonopenAPP=True   
+                print("Click boton_openAPP",self._accname)
+                self.driver.maximize_window()
+                return ventanaactiva
+                
+            except :
+                time.sleep(5)
+                self.clickboton_openAPP(ventanaactiva)  
         
         if  self.clickbotonopenAPP==False:
-            self.clickboton_openAPP()
-    
+            self.clickboton_openAPP(ventanaactiva)
+        
         #borrarvisualstudiocode('//*[@id="delete"]/div')
 
 

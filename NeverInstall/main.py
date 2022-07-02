@@ -5,157 +5,146 @@
 #pip install selenium
 #pip install "pymongo[srv]"
 
-
-from multiprocessing.connection import wait
 import time
-from threading import Thread, Barrier, Lock
-
 from ModuloEventosWindows.focus_google import *
 from Modulo_Selenium.Crear_driver import *
 from Modulo_Selenium.Tabs import *
 from Modulo_neverInstall.estados_home import *
 from Modulo_neverInstall.homeweb import *
 from Modulo_neverInstall.evaluar import *
+from Modulo_neverInstall.SingIn import *
 from Modulo_DB.DB_conect import *
 from Modulo_DB.Never_install.DB_Never_Install import *
 from Modulo_DB.Never_install.DB_TinyTask import *
 from selenium import *
 import pyautogui as pyauto
 import pygetwindow as gw
-
+import sys
 from Modulo_Selenium.mousecontrol import *
-lock=Lock()
+import asyncio
+from  funciones import *
+sys.dont_write_bytecode = True
 
+miclick=mousecontrol()
 ventanaactiva=0
-numero_multitareas=7
-sleep=[1, 3, 5, 7, 9 ,11, 13]
+numero_multitareas=10
+sleep=[1, 3, 5, 7, 9 ,11, 13,15,17,19]
 
 #funcion que lanza los multihilos y actualiza el estado de la acc a 1 si finaliza todo ok.
 
-url_inicial='https://neverinstall.com/signin'
 
 
-def func(threads,id,emails, password,accname,acc_estado,acc_count,acc_region,sleep,locke,i):
+
+async def func(driver,id,emails, password,accname,acc_estado,acc_count,acc_region):
   global ventanaactiva
+  ventanaactiva=0
   
-  driver =crear_driver()  #Crea un ombjeto de la clase driver selenium
-  driver.maximize_window()
-   
-  singupneverinstall=singinggoogle(driver, emails,password,accname,barrier,url_inicial) #Crea un objeto para loging google
+   #Crea un ombjeto de la clase driver selenium
   
-  singupneverinstall.primerpasoiniciarlogingoogle() #Llama a la funcion que hace loging en neverinstall 
-  #commandWindows.setActWin()
+  url_inicial='https://neverinstall.com/signin' 
+  singupneverinstall= singinggoogle(driver,emails,password,accname,url_inicial) #Crea un objeto para loging google
+  
+  
+  
+  tasksingup =asyncio.create_task(singupneverinstall.primerpasoiniciarlogingoogle())
+  await tasksingup
+  await asyncio.sleep(1)
+  print("Is OK Sing up acount ", accname)
+  await asyncio.sleep(1)
+  print("Verificando estado inicial en home ", accname)
+  #singupneverinstall.primerpasoiniciarlogingoogle() #Llama a la funcion que hace loging en neverinstall 
   driver.minimize_window()
-  print("Verificando estado inicial de home", accname)
+ 
   #La clase home verifica el estado de los botones en home de neverinstall.com para Nort America, Europe
   #Funcion que retorna el estado de los botones ("boton_createAPP", "boton_resumen", "boton_openAPP", "boton_buildingAPP")
   estado_home = home(driver,accname)  
+  
+  task_home= asyncio.create_task(estado_home.accioninicialenhome(ventanaactiva))
+  ventanaactiva = await task_home
+  await asyncio.sleep(10)
+  driver.minimize_window()
+  await asyncio.sleep(1)
+  time.sleep(2)
+  driver.maximize_window()
+  time.sleep(2)
+  driver.minimize_window()
+  ####voy aqui .... 
+  #falta configuar que todas las ventanas se minimizen despues de que cargen ...
+  # el problema es que al dar click en resumen  se maximiza sola...
+  
+
+
+  print (ventanaactiva)
+  async def click(ventanaactiva):
+    driver.maximize_window()
     
-  tabs=tabcontrol(driver)
-  tabs.countTabs() 
-  while len(tabs.count_Tabs)==1:
-    print ("No se cargo VS CODE",accname)
-    estado_home.accioninicialenhome()
-    time.sleep(1)
-    if len(tabs.countTabs())==2:
-      break
-
-  
-  print ("Primer paso OK... verificando numero de TABS")
-
-
-  while len(tabs.count_Tabs)==2:
-    tabs.switch_to_vscodeTab()
-    print ("Tab actual VS CODE",accname)
-    break
-
-  '''
-  miclick=mousecontrol()
-  
-  lock.acquire()
-  while ventanaactiva ==0:
-    try:
-      ventanaactiva=id
-      driver.maximize_window()
-      time.sleep(3)
+    if ventanaactiva==1:
+      ventanaactiva=0
+      
+      
+      miclick=mousecontrol()
+      miclick.calentando()
+      await asyncio.sleep(15)
       miclick.primerclick()
-      time.sleep(3)
+      time.sleep(2)
       miclick.segundoclick()
-      time.sleep(3)
-      miclick.segundoclick()
-      time.sleep(3)     
+      time.sleep(2)
+      miclick.tercerclick()
+      time.sleep(2)
+      miclick.pegar()
+      time.sleep(5)
       driver.minimize_window()
-
+      
       ventanaactiva=0
+      time.sleep(1)
+      await asyncio.sleep(15)
+  task_click= asyncio.create_task(click(ventanaactiva))
+  await task_click
 
-      break
-    except:
-      print ("Error haciendo focus en la ventana ",accname)
-      ventanaactiva=0
-      break
-  lock.release()
-  '''
-    
-  print ("continua condigo....",accname)
+
+  print (f"{accname} continua condigo....ventana activa {ventanaactiva}")
   
 
   
   #Tabs=countTabs(driver)
 
-  time.sleep(10)
-
-  threads.wait()
-
-'''
-
-  
-  resul0=estado0 (estadosdelosbotones,Tabs, driver)
-  REturn,starttime1, starttime2=resul0
-
-  print ("Return resul0",REturn )
-  
-  
-  
-  print ("paso estado pass evaluacion 1... dio click en boton")
-  
-  #paso2 = evaluacion2(driver,starttime1,starttime2)
-  #Tabs=countTabs(driver)
-  #estadosdelosbotones=estadodebotonenhome(driver)
-    
-  #cmd = "test1.exe"
-  #os.system(cmd)
-
-  print ("Codigo continua... finalizando..... END... bye bye")
-
-  driver.close()
-  threads.wait()
-'''
 
 
 acc_data=DB_neverinstall_get_acc (numero_multitareas)
 for e in acc_data:
   print (e)
 numero_multitareas=acc_data[7]
-print("hilos",numero_multitareas)
+print("Numero de funciones",numero_multitareas)
 
 tinytaskreset()
 
+driver0 = driver()
+driver1 = driver()
+driver2 = driver()
+driver3 = driver()
+driver4 = driver()
+driver5 = driver()
+driver6 = driver()
+driver7 =driver()
+driver8 =driver()
+driver9 =driver()
+list_drivers=[driver0,driver1, driver2,driver3,driver4,driver5,driver6,driver7,driver8,driver9 ]
+#
 
-barrier = Barrier(numero_multitareas)
-hiloscerrados = 0
-threads = []
-for i in range(numero_multitareas):
-  #i = Thread(target=func, args=(barrier,emails[i],passwod[i],accname[i],acc_estado[i]))
-  i = Thread(target=func, args=(barrier, acc_data[0][i], acc_data[1][i],
-                   acc_data[2][i], acc_data[3][i],acc_data[4][i] , 
-                   acc_data[5][i] , acc_data[6][i], sleep[i],lock,i ))
+async def main():
+    # Schedule three calls *concurrently*:
+    L = await asyncio.gather(
+      func ( driver0,acc_data[0][0], acc_data[1][0],acc_data[2][0], acc_data[3][0],acc_data[4][0],acc_data[5][0],acc_data[6][0]),
+      func (driver1,acc_data[0][1], acc_data[1][1],acc_data[2][1], acc_data[3][1],acc_data[4][1],acc_data[5][1],acc_data[6][1]),
+      func (driver2,acc_data[0][2], acc_data[1][2],acc_data[2][2], acc_data[3][2],acc_data[4][2],acc_data[5][2],acc_data[6][2]),
+      func (driver3,acc_data[0][3], acc_data[1][3],acc_data[2][3], acc_data[3][3],acc_data[4][3],acc_data[5][3],acc_data[6][3]),
+      func (driver4,acc_data[0][4], acc_data[1][4],acc_data[2][4], acc_data[3][4],acc_data[4][4],acc_data[5][4],acc_data[6][4]),
+      func (driver5,acc_data[0][5], acc_data[1][5],acc_data[2][5], acc_data[3][5],acc_data[4][5],acc_data[5][5],acc_data[6][5]),
+      func (driver6,acc_data[0][6], acc_data[1][6],acc_data[2][6], acc_data[3][6],acc_data[4][6],acc_data[5][6],acc_data[6][6]),
+      func (driver7,acc_data[0][7], acc_data[1][7],acc_data[2][7], acc_data[3][7],acc_data[4][7],acc_data[5][7],acc_data[6][7]),
+      func (driver8,acc_data[0][8], acc_data[1][8],acc_data[2][8], acc_data[3][8],acc_data[4][8],acc_data[5][8],acc_data[6][8]),
+      func (driver9,acc_data[0][9], acc_data[1][9],acc_data[2][9], acc_data[3][9],acc_data[4][9],acc_data[5][9],acc_data[6][9])
+
+    )
     
-  i.start()
- 
-  #time.sleep(sleep[i])
-  print ("sleep 0.2 seg en threads ")
-  time.sleep(1)
-  threads.append(i)
-
-for i in threads:
-  i.join()
+asyncio.run(main())

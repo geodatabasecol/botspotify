@@ -37,7 +37,11 @@ neverinstal4={ "email": "azuresilk04@gmail.com","passwod":"fps91507856","accname
 neverinstal5={ "email": "azuresilk05@gmail.com","passwod":"fps91507856","accname":"ACCNEVER_INSTALL_5","acc_estado":0 ,"acc_count": 0 , "acc_region": "USA" } 
 neverinstal6={ "email": "azuresilk06@gmail.com","passwod":"fps91507856","accname":"ACCNEVER_INSTALL_6","acc_estado":0 ,"acc_count": 0 ,"acc_region": "USA" }  
 neverinstal7={ "email": "azuresilk07@gmail.com","passwod":"fps91507856","accname":"ACCNEVER_INSTALL_7","acc_estado":0 ,"acc_count": 0 ,"acc_region": "USA" } 
-neverinstall_new_add=[neverinstal1,neverinstal2,neverinstal3, neverinstal4,neverinstal5,neverinstal6,neverinstal7]
+neverinstal8={ "email": "azuresilk08@gmail.com","passwod":"fps91507856","accname":"ACCNEVER_INSTALL_8","acc_estado":0 ,"acc_count": 0 ,"acc_region": "USA" } 
+neverinstal9={ "email": "azuresilk09@gmail.com","passwod":"fps91507856","accname":"ACCNEVER_INSTALL_9","acc_estado":0 ,"acc_count": 0 ,"acc_region": "USA" } 
+neverinstal10={ "email": "azuresilk10@gmail.com","passwod":"fps91507856","accname":"ACCNEVER_INSTALL_10","acc_estado":0 ,"acc_count": 0 ,"acc_region": "USA" } 
+
+neverinstall_new_add=[neverinstal1,neverinstal2,neverinstal3, neverinstal4,neverinstal5,neverinstal6,neverinstal7,neverinstal8,neverinstal9,neverinstal10]
 
 
 

@@ -1,35 +1,39 @@
 import time
-from turtle import position
-import pyautogui as pyauto 
+from ModuloEventosWindows.focus_google import *
+from Modulo_Selenium.Crear_driver import *
+from Modulo_Selenium.Tabs import *
+from Modulo_neverInstall.estados_home import *
+from Modulo_neverInstall.homeweb import *
+from Modulo_neverInstall.evaluar import *
+from Modulo_neverInstall.SingIn import *
+from Modulo_DB.DB_conect import *
+from Modulo_DB.Never_install.DB_Never_Install import *
+from Modulo_DB.Never_install.DB_TinyTask import *
+from selenium import *
+import pyautogui as pyauto
+import pygetwindow as gw
+import sys
+from Modulo_Selenium.mousecontrol import *
+import asyncio
+from  funciones import *
 
-class mousecontrol:
-    def __init__(self) -> None:
-        pass
-    def primerclick(self):
-        pyauto.position(x=305, y=158)
-        pyauto.click(x=305, y=158)
+class test:
+    def __init__(self,driver):
+        self.driver= driver
+    def verificabotonresumenapp(self):
+        try:
+            (WebDriverWait(self.driver, 0.1)
+                .until(expected_conditions.visibility_of_element_located((By.XPATH, "/html/body/div[1]/div[3]/form/div[1]/div[1]/div[3]/center/input[1]"))) 
+            )
+            
+            return True
+        except :
+            
+            return False
 
-    def segundoclick(self):
-        pyauto.position(x=305, y=148)
-        pyauto.click(x=305, y=148)   
-    
-    def tercerclick(self):
-        pyauto.position(x=1365, y=645)
-        pyauto.click(x=1365, y=645)      
-    
-    def obtener(self):
-        while pyauto.position():
-            print(pyauto.position())
-mitest= mousecontrol()
+drivera =driver()
+drivera.get("https://www.google.com")
 
+mitest=test(drivera)
 
-time.sleep(15)
-mitest.primerclick()
-mitest.primerclick()
-time.sleep(3)
-mitest.segundoclick()
-mitest.segundoclick()
-time.sleep(3)
-mitest.tercerclick()
-mitest.tercerclick()
-time.sleep(3)  
+print(mitest.verificabotonresumenapp())

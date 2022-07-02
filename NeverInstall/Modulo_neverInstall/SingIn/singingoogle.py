@@ -6,19 +6,19 @@ from selenium.common.exceptions import NoSuchElementException
 
 
 from ModuloEventosWindows.focus_google import cWindow
+import asyncio
 # INICIO A HACER LOGIN con google
 class singinggoogle:
-    def __init__ (self,driver,emails,password,accname,barrier,url_inicial):
+    def __init__ (self,driver,emails,password,accname,url_inicial):
         self.driver=driver
         self.email=emails
         self.password= password
         self.accname=accname
-        self.barrier=barrier
-        self.url_inicial=url_inicial
         
-   
-# ingresando con GOOGLE           
-    def iniciarcongoogle(self):
+        self.url_inicial=url_inicial
+
+
+    async def iniciarcongoogle(self):
         def check_exist_by_XPATH_botton (XPATH):
             global count1
             try:
@@ -40,13 +40,13 @@ class singinggoogle:
                 return False
 
         if check_exist_by_XPATH_botton ("/html/body/div[1]/div/main/div/div[2]/div/div[3]/button[1]/div/div")==False:
-            print ("No existe botton iniciar con google 9-24")
+            print ("No existe botton iniciar con google 9-24",self.accname)
             return False
    
 
 
      # ingresar el correo 
-    def ingresandocorreo(self):
+    async def ingresandocorreo(self):
         def check_exist_by_ID_sendkey (ID_,send_keys_):
             global count1
             try:
@@ -97,7 +97,7 @@ class singinggoogle:
 
 
   # ingresar la contraseña  
-    def ingresandocontrasena(self):
+    async def ingresandocontrasena(self):
         def check_exist_by_ID_sendkey (XPATH,send_keys_):
             global count1
             try:
@@ -143,27 +143,29 @@ class singinggoogle:
         
         return True
     
-    def primerpasoiniciarlogingoogle(self):
+    async def primerpasoiniciarlogingoogle(self):
 
         
         try:
-            self.driver.get(self.url_inicial)
-            time.sleep(1)
+             task_loadurl=self.driver.get(self.url_inicial)
+             await task_loadurl
   #
         except :
         
             pass
-        self.barrier.wait()
+        
         print("Load NeverInstall.com ",self.accname)
 
         #commandWindows.hacerfocusenlaventana(accname)
-        time.sleep(5)    
+           
+        task_ingresacongoogle= asyncio.create_task(self.iniciarcongoogle())
+        await task_ingresacongoogle
+
+        print("Singup con google account ", self.accname)
+        task_ingresarcorreo= asyncio.create_task(self.ingresandocorreo())
+        await task_ingresarcorreo
         
-        self.iniciarcongoogle()
-        print("Singup con google", self.accname)
-        self.barrier.wait()
-        self.ingresandocorreo()
-        self.barrier.wait()
-        print ("Ingresando correo", self.accname)
-        self.ingresandocontrasena()
-        self.barrier.wait()
+        print ("Ingresando correo el correo ", self.accname)
+        task_contrasena= asyncio.create_task(self.ingresandocontrasena())
+        await task_contrasena
+        print ("Ingresando contraseña ", self.accname)
