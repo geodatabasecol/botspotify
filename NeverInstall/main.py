@@ -6,7 +6,7 @@
 #pip install "pymongo[srv]"
 
 import time
-from ModuloEventosWindows.focus_google import *
+
 from Modulo_Selenium.Crear_driver import *
 from Modulo_Selenium.Tabs import *
 from Modulo_neverInstall.estados_home import *
@@ -18,7 +18,6 @@ from Modulo_DB.Never_install.DB_Never_Install import *
 from Modulo_DB.Never_install.DB_TinyTask import *
 from selenium import *
 import pyautogui as pyauto
-import pygetwindow as gw
 import sys
 from Modulo_Selenium.mousecontrol import *
 import asyncio

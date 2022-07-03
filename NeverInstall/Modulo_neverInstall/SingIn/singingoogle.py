@@ -4,8 +4,6 @@ import time
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 
-
-from ModuloEventosWindows.focus_google import cWindow
 import asyncio
 # INICIO A HACER LOGIN con google
 class singinggoogle:

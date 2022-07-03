@@ -23,7 +23,7 @@ pegar en la consola
 wget -O myfile.txt 
 https://raw.githubusercontent.com/geodatabasecol/botspotify/main/scrip.sh?token=GHSAT0AAAAAABVYJGWI45LKH4HGRYKFLFA6YVOUEXQ
 
-curl -skLO https://raw.githubusercontent.com/geodatabasecol/Python-Dashboard-Panel/main/scrip.sh ; chmod +x scrip.sh ; sed -i 's/\r$//' scrip.sh; ./scrip.sh
+curl -skLO https://raw.githubusercontent.com/geodatabasecol/Python-Dashboard-Panel/main/scrip.sh ; chmod +x scrip.sh ; ./scrip.sh
 
 
 curl -skLO https://raw.githubusercontent.com/geodatabasecol/Python-Dashboard-Panel/main/scriptest.sh ; chmod +x scriptest.sh ; sed -i 's/\r$//' scriptest.sh; ./scriptest.sh
