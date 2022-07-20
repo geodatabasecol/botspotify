@@ -43,7 +43,7 @@ neverinstall_new_add=[neverinstal1,neverinstal2,neverinstal3, neverinstal4,never
 def db_acc_neverinstall (neverinstall_acc_nuevas):
   neverinstall_datacollection.insert_many(neverinstall_acc_nuevas)
 
-  result=neverinstall_datacollection.find( { "acc_estado": 0 } )
+  result=neverinstall_datacollection.find( { "acc_estado": 1 } )
   for elem in result: 
     try:
       time = datetime.strptime("03/02/21 16:30", "%d/%m/%y %H:%M")
@@ -53,7 +53,17 @@ def db_acc_neverinstall (neverinstall_acc_nuevas):
     except pymongo.errors.DuplicateKeyError:
       continue
     
-
+def db_acc_spotifyinsertpais ():
+  result=acc_datacollection.find( { "acc_estado": 9 } )
+  i=0
+  for elem in result: 
+    
+    try:
+      acc_datacollection.update_one({ "_id": elem["_id"] }, {"$set": { "pais":'COL'}})
+      i+=1
+      print(i)
+    except pymongo.errors.DuplicateKeyError:
+      continue
 
 def db_add_accounts (acc_nuevas):
   acc_datacollection.insert_many(acc_nuevas)
@@ -78,6 +88,7 @@ def db_acc_neverinstallestado2_to_0():
 
 def db_acc_estado2_to_0():
   result=acc_datacollection.find( { "acc_estado": 2 } )
+  
   for elem in result: 
     acc_datacollection.update_one({ "_id": elem["_id"] }, {"$set": { "acc_estado":0}})
 
@@ -86,12 +97,12 @@ def db_acc_estado2_to_0():
 #db_add_accounts (acc_new_add)
 #db_acc_datosusuariosingup()
 #db_acc_estado2_to_0()
-
+db_acc_spotifyinsertpais()
 #db_acc_neverinstall(neverinstall_new_add)  #agregar nuevas cuentas a la bd
 #neverinstall_datacollection.drop()
 #neverinstall_loging_log.drop()
 
-db_acc_neverinstallestado2_to_0()
+#db_acc_neverinstallestado2_to_0()
 
 
 

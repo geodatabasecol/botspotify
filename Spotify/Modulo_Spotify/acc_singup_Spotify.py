@@ -48,7 +48,7 @@ def func(threads,emails, passwod,username,dia,mes,year,genero):
   #ingresar = driver.find_element(By.ID,"login-button")
   #ingresar.click()
   print("ok loging  ", emails)
-  time.sleep(20)
+  time.sleep(35)
   
   client = pymongo.MongoClient("mongodb+srv://silklips:!Fps91507856@mycrypta.ugxec.mongodb.net/?retryWrites=true&w=majority")
   db = client["accounts"]
@@ -83,7 +83,7 @@ acc_user_singupcollection = db["acc_user_info_singup"]
 #acc_datacollection.drop()
 #acc_user_singupcollection.drop()
 
-numero_multitareas = 3
+numero_multitareas = 1
 
 emails=[]
 passwod=[]
