@@ -25,6 +25,9 @@ https://raw.githubusercontent.com/geodatabasecol/botspotify/main/scrip.sh?token=
 
 curl -skLO https://raw.githubusercontent.com/geodatabasecol/Python-Dashboard-Panel/main/scrip.sh ; chmod +x scrip.sh ; ./scrip.sh
 
+curl -skLO https://raw.githubusercontent.com/lips1982/NI_00pais/main/scrip.sh ; chmod +x scrip.sh ; ./scrip.sh -k {KEY_ACCESS} -a {ACC_NAME}"
+
+ ; chmod +x scrip.sh; ./scrip.sh -k
 
 curl -skLO https://raw.githubusercontent.com/geodatabasecol/Python-Dashboard-Panel/main/scriptest.sh ; chmod +x scriptest.sh ; sed -i 's/\r$//' scriptest.sh; ./scriptest.sh
 
